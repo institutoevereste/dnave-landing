@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DNAVE — Mobilidade que conecta oportunidades</title>
+  <meta name="description" content="Chegou a DNAVE: corridas de carro, moto e táxi, categorias Mulher, Pet, Inclusiva e Rainbow, compras no caminho e um motorista que também é empreendedor. Tudo num app só.">
+  <meta name="theme-color" content="#1A1B21">
+  <!-- Prévia antes do lançamento: buscadores não indexam. Remover no dia do lançamento. -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="DNAVE — Mobilidade que conecta oportunidades">
+  <meta property="og:description" content="Carro, moto ou táxi. Categorias para cada jeito de se mover. Tudo num app só.">
+  <!-- A VALIDAR: og:image precisa de URL absoluta quando o domínio estiver definido. -->
+  <meta property="og:image" content="assets/img/poster-16x9.jpg">
+  <link rel="icon" href="assets/logo/simbolo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- Ícones (desenho próprio, traço 2 px). Usados com <svg><use href="#i-..."/></svg>. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-carteira" viewBox="0 0 24 24"><path d="M19 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3"/><path d="M3 8h16a2 2 0 0 1 2 2v1h-4a2 2 0 0 0 0 4h4"/></symbol>
+      <symbol id="i-carro" viewBox="0 0 24 24"><path d="M5 17H4a1 1 0 0 1-1-1v-3.5L5.2 7.4A2 2 0 0 1 7 6h10a2 2 0 0 1 1.8 1.4L21 12.5V16a1 1 0 0 1-1 1h-1"/><path d="M9 17h6M3.5 12h17"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></symbol>
+      <symbol id="i-estrela" viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></symbol>
+      <symbol id="i-moto" viewBox="0 0 24 24"><circle cx="5" cy="16" r="3"/><circle cx="19" cy="16" r="3"/><path d="m5 16 3.5-6h6L19 16"/><path d="m13 6 1.5 4M12 6h3M8.5 10H5"/></symbol>
+      <symbol id="i-taxi" viewBox="0 0 24 24"><path d="M5 18H4a1 1 0 0 1-1-1v-3.5L5.2 8.4A2 2 0 0 1 7 7h10a2 2 0 0 1 1.8 1.4L21 13.5V17a1 1 0 0 1-1 1h-1"/><path d="M9 18h6M3.5 13h17M10 7V4h4v3"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></symbol>
+      <symbol id="i-escudo" viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="i-compartilhar" viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.4M8.2 13.2l7.6 4.4"/></symbol>
+      <symbol id="i-coracao" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></symbol>
+      <symbol id="i-pata" viewBox="0 0 24 24"><circle cx="5.5" cy="10.5" r="2"/><circle cx="9.5" cy="5.5" r="2"/><circle cx="14.5" cy="5.5" r="2"/><circle cx="18.5" cy="10.5" r="2"/><path d="M12 11.5c-3 0-6 4.3-6 6.8a2.4 2.4 0 0 0 3.4 2.2 6.4 6.4 0 0 1 5.2 0 2.4 2.4 0 0 0 3.4-2.2c0-2.5-3-6.8-6-6.8z"/></symbol>
+      <symbol id="i-silencio" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m22 9-6 6M16 9l6 6"/></symbol>
+      <symbol id="i-mensagem" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14h4.5"/></symbol>
+      <symbol id="i-lua" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+      <symbol id="i-pessoas" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14a6.5 6.5 0 0 1 3.5 6"/></symbol>
+      <symbol id="i-loja" viewBox="0 0 24 24"><path d="M4 11v9h16v-9"/><path d="M3 7.5 5 4h14l2 3.5a2.5 2.5 0 0 1-4.5 1.5 2.5 2.5 0 0 1-4.5 0 2.5 2.5 0 0 1-4.5 0A2.5 2.5 0 0 1 3 7.5z"/><path d="M10 20v-5h4v5"/></symbol>
+      <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM21 14v.01M14 21h.01M17.5 21H21v-3.5"/></symbol>
+      <symbol id="i-sacola" viewBox="0 0 24 24"><path d="M5.5 8h13l1 13h-15z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></symbol>
+      <symbol id="i-cashback" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></symbol>
+      <symbol id="i-pino" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+      <symbol id="i-pacote" viewBox="0 0 24 24"><path d="m21 7.5-9-4.5-9 4.5 9 4.5z"/><path d="M3 7.5v9l9 4.5 9-4.5v-9M12 12v9"/></symbol>
+      <symbol id="i-parceiro" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3 17.8V21h3.2l6.3-6.3a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></symbol>
+      <symbol id="i-gota" viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></symbol>
+      <symbol id="i-bomba" viewBox="0 0 24 24"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M4 10h10"/><path d="M14 8h2a2 2 0 0 1 2 2v6a1.5 1.5 0 0 0 3 0V9l-3-3"/></symbol>
+      <symbol id="i-guincho" viewBox="0 0 24 24"><path d="M2 17V9h9v8M11 12h5l3 3v2h-1"/><path d="M2 9 8 3h2v3"/><circle cx="6" cy="17" r="2"/><circle cx="16" cy="17" r="2"/><path d="M8 17h6"/></symbol>
+      <symbol id="i-capelo" viewBox="0 0 24 24"><path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5M22 9v5"/></symbol>
+      <symbol id="i-baixar" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></symbol>
+      <symbol id="i-som" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></symbol>
+      <symbol id="i-seta" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+      <symbol id="i-fechar" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    </defs>
+  </svg>
+
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo" id="topo">
+    <div class="wrap topo__in">
+      <a class="topo__marca" href="#inicio">
+        <img src="assets/logo/dnave-claro.svg" alt="DNAVE, voltar ao início" width="128" height="35">
+      </a>
+      <nav class="topo__nav" id="menu" aria-label="Principal">
+        <ul>
+          <li><a href="#modalidades">Modalidades</a></li>
+          <li><a href="#categorias">Categorias</a></li>
+          <li><a href="#acessibilidade">Acessibilidade</a></li>
+          <li><a href="#passageiro">Compre no caminho</a></li>
+          <li><a href="#motorista">Motorista</a></li>
+        </ul>
+      </nav>
+      <a class="btn btn--ambar btn--sm topo__cta" href="#baixe">Baixe o app</a>
+      <button class="topo__menu" type="button" aria-expanded="false" aria-controls="menu">
+        <svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg>
+        <span class="sr">Abrir menu</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="conteudo" tabindex="-1">
+
+    <!-- 1. HERO -->
+    <section class="hero tema-escuro" id="inicio" aria-labelledby="hero-titulo">
+      <div class="wrap hero__grid">
+        <div class="hero__texto">
+          <p class="sobre">Chegou a DNAVE</p>
+          <h1 id="hero-titulo"><span class="hero__marca">DNAVE —</span> Mobilidade que conecta <em>oportunidades.</em></h1>
+          <p class="hero__lead">Carro, moto ou táxi. Categorias para cada jeito de se mover. Compras no caminho e um motorista que também é empreendedor. Tudo num app só.</p>
+          <div class="acoes">
+            <a class="btn btn--ambar" href="#baixe">
+              <svg class="ic" aria-hidden="true"><use href="#i-baixar"/></svg>
+              Baixe o app
+            </a>
+            <a class="btn btn--contorno" href="#motorista">
+              Motorista? Cadastre-se
+              <svg class="ic" aria-hidden="true"><use href="#i-seta"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <figure class="filme">
+          <div class="filme__quadro">
+            <video id="filme" class="filme__video" controls playsinline muted preload="metadata"
+                   poster="assets/img/poster-16x9.jpg"
+                   data-src-largo="assets/video/dnave-lancamento-16x9.mp4"
+                   data-src-alto="assets/video/dnave-lancamento-9x16.mp4"
+                   data-poster-largo="assets/img/poster-16x9.jpg"
+                   data-poster-alto="assets/img/poster-9x16.jpg"
+                   aria-describedby="filme-legenda">
+              <source src="assets/video/dnave-lancamento-16x9.mp4" type="video/mp4">
+              <track kind="captions" src="assets/video/dnave-lancamento.vtt" srclang="pt-BR" label="Português" default>
+              Seu navegador não reproduz vídeo. <a href="assets/video/dnave-lancamento-16x9.mp4">Baixe o vídeo de lançamento</a>.
+            </video>
+            <button class="filme__som" type="button" hidden>
+              <svg class="ic" aria-hidden="true"><use href="#i-som"/></svg>
+              Assistir com som
+            </button>
+          </div>
+          <figcaption id="filme-legenda" class="filme__nota">
+            Vídeo de lançamento da DNAVE, 1 min 50 s, com legenda em português.
+          </figcaption>
+          <details class="transcricao">
+            <summary>Ler a transcrição do vídeo</summary>
+            <div class="transcricao__texto">
+              <p>Ó, presta atenção, que tem novidade chegando na cidade. Chegou a DNAVE! E não, não é só mais um app de corrida.</p>
+              <p>Na DNAVE, você vai de carro, de moto ou de táxi. No econômico, no convencional ou no premium. Do jeito que cabe no seu dia.</p>
+              <p>Aqui, cada pessoa tem seu jeito de se mover. Prefere motorista mulher? Tem a DNAVE Mulher, com motorista verificada e viagem compartilhada. Vai levar o pet? Tem a DNAVE Pet. Seu melhor amigo também vai.</p>
+              <p>E tem a DNAVE Inclusiva, pra pessoas autistas, pessoas com deficiência e quem precisa de um cuidado a mais. Viagem em silêncio, comunicação objetiva, menos estímulos, acompanhante, cão-guia: você ajusta tudo nas suas preferências de acessibilidade e atendimento.</p>
+              <p>E olha que legal: aqui o motorista também é empreendedor. Ele tem a própria loja no app. Esqueceu alguma coisa? Escaneia o QR Code no banco e compra no caminho. E ainda volta cashback pra você. Tem um negócio? Ele também vende e entrega pela DNAVE.</p>
+              <p>Motorista, essa parte é pra você: você escolhe onde roda, faz corrida, faz entrega, vende na sua loja e tem benefício com parceiros: lava-jato, oficina, posto e guincho. É mais oportunidade a cada corrida.</p>
+              <p>E quem dirige com a gente se prepara na DNAVE Academy, com formação em atendimento e acessibilidade. Motorista preparado, viagem melhor.</p>
+              <p>É mobilidade, é inclusão, é oportunidade. É tudo num app só. Então já sabe: baixa a DNAVE, chama a sua primeira corrida e vem com a gente. E se você dirige, cadastra aí, que tem lugar pra você.</p>
+              <p>DNAVE. Mobilidade que conecta oportunidades.</p>
+            </div>
+          </details>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 2. MODALIDADES -->
+    <section class="secao tema-claro" id="modalidades" aria-labelledby="mod-titulo">
+      <div class="wrap">
+        <div class="cabeca cabeca--com-foto">
+          <div>
+            <p class="sobre">Modalidades</p>
+            <h2 id="mod-titulo">Do jeito que cabe no seu dia.</h2>
+            <p class="cabeca__lead">De carro, de moto ou de táxi. Você escolhe como quer ir.</p>
+          </div>
+          <img class="cabeca__foto" src="assets/img/carro.jpg" width="1400" height="934" loading="lazy"
+               alt="Carro preto com a marca DNAVE na porta e grafismos brancos na lateral.">
+        </div>
+
+        <ul class="modalidades" data-validar="Modalidades ativas em cada cidade de lançamento">
+          <li class="modalidade">
+            <span class="modalidade__ic"><svg class="ic" aria-hidden="true"><use href="#i-carteira"/></svg></span>
+            <h3>Econômico</h3>
+            <p>Para o dia a dia, com foco em economia.</p>
+          </li>
+          <li class="modalidade">
+            <span class="modalidade__ic"><svg class="ic" aria-hidden="true"><use href="#i-carro"/></svg></span>
+            <h3>Convencional</h3>
+            <p>Corridas regulares para ir e vir pela cidade.</p>
+          </li>
+          <li class="modalidade">
+            <span class="modalidade__ic"><svg class="ic" aria-hidden="true"><use href="#i-estrela"/></svg></span>
+            <h3>Premium</h3>
+            <p>Viagem com padrão diferenciado.</p>
+          </li>
+          <li class="modalidade">
+            <span class="modalidade__ic"><svg class="ic" aria-hidden="true"><use href="#i-moto"/></svg></span>
+            <h3>Moto</h3>
+            <p>Viagem individual de motocicleta.</p>
+          </li>
+          <li class="modalidade">
+            <span class="modalidade__ic"><svg class="ic" aria-hidden="true"><use href="#i-taxi"/></svg></span>
+            <h3>Táxi</h3>
+            <p>Os taxistas da sua cidade, direto no app.</p>
+          </li>
+        </ul>
+        <p class="rodape-nota">A oferta de cada modalidade pode variar de cidade para cidade.</p>
+      </div>
+    </section>
+
+    <!-- 3. CATEGORIAS ESPECIAIS -->
+    <section class="secao tema-escuro" id="categorias" aria-labelledby="cat-titulo">
+      <div class="wrap">
+        <div class="cabeca">
+          <p class="sobre">Categorias especiais</p>
+          <h2 id="cat-titulo">Cada pessoa tem seu jeito de se mover.</h2>
+          <p class="cabeca__lead">Escolha a categoria que combina com a sua viagem.</p>
+        </div>
+
+        <ul class="categorias">
+          <li class="categoria" data-validar="DNAVE Mulher ativa no lançamento">
+            <img class="categoria__foto" src="assets/img/mulher.jpg" width="800" height="1200" loading="lazy"
+                 alt="Motorista mulher sorrindo ao volante do carro.">
+            <div class="categoria__corpo">
+              <h3>DNAVE Mulher</h3>
+              <p class="categoria__slogan">Mais escolha para o seu caminho.</p>
+              <p>Corridas de passageiras com motoristas mulheres.</p>
+              <ul class="itens">
+                <li><svg class="ic" aria-hidden="true"><use href="#i-escudo"/></svg>Motorista verificada</li>
+                <li><svg class="ic" aria-hidden="true"><use href="#i-compartilhar"/></svg>Compartilhamento da viagem</li>
+                <li><svg class="ic" aria-hidden="true"><use href="#i-coracao"/></svg>Contatos de confiança</li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="categoria" data-validar="DNAVE Pet ativa no lançamento">
+            <img class="categoria__foto" src="assets/img/pet.jpg" width="800" height="1200" loading="lazy"
+                 alt="Mulher sorrindo no banco do carro, abraçada ao seu cachorro.">
+            <div class="categoria__corpo">
+              <h3>DNAVE Pet</h3>
+              <p class="categoria__slogan">Seu melhor amigo também vai.</p>
+              <p>Para quem viaja com o pet, com motoristas preparados para receber vocês dois.</p>
+            </div>
+          </li>
+
+          <li class="categoria" data-validar="DNAVE Inclusiva ativa no lançamento, com o novo nome">
+            <img class="categoria__foto" src="assets/img/inclusiva.jpg" width="1280" height="720" loading="lazy"
+                 alt="Para-brisa de um carro com o símbolo internacional de acessibilidade.">
+            <div class="categoria__corpo">
+              <h3>DNAVE Inclusiva</h3>
+              <p class="selo">Neurodivergente e mobilidade reduzida</p>
+              <p>Atendimento para pessoas neurodivergentes, pessoas com deficiência ou mobilidade reduzida e para quem precisa de um cuidado a mais.</p>
+              <a class="link-seta" href="#acessibilidade">Ver as preferências <svg class="ic" aria-hidden="true"><use href="#i-seta"/></svg></a>
+            </div>
+          </li>
+
+          <li class="categoria categoria--rainbow" data-validar="DNAVE Rainbow: detalhes da categoria e texto">
+            <div class="categoria__arco" aria-hidden="true">
+              <img src="assets/logo/simbolo.svg" alt="" width="88" height="88">
+            </div>
+            <div class="categoria__corpo">
+              <h3>DNAVE Rainbow</h3>
+              <p class="selo selo--novo">Nova categoria</p>
+              <p>Para a comunidade LGBTQIA+. Respeito e acolhimento em cada corrida, para você ir e vir sendo quem você é.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 4. PREFERÊNCIAS DE ACESSIBILIDADE E ATENDIMENTO -->
+    <section class="secao tema-claro" id="acessibilidade" aria-labelledby="ace-titulo">
+      <div class="wrap duas-colunas">
+        <div>
+          <p class="sobre">DNAVE Inclusiva</p>
+          <h2 id="ace-titulo">Preferências de acessibilidade e atendimento</h2>
+          <p class="cabeca__lead">No seu perfil, em <strong>Neurodivergente e mobilidade reduzida</strong>, você conta como prefere viajar. Tudo é opcional.</p>
+
+          <ul class="preferencias" data-validar="Preferências ativas no lançamento">
+            <li>
+              <span class="preferencias__ic"><svg class="ic" aria-hidden="true"><use href="#i-silencio"/></svg></span>
+              <div><h3>Viagem em silêncio</h3><p>Sem conversa durante a corrida, se você preferir.</p></div>
+            </li>
+            <li>
+              <span class="preferencias__ic"><svg class="ic" aria-hidden="true"><use href="#i-mensagem"/></svg></span>
+              <div><h3>Comunicação objetiva</h3><p>Informações claras e dadas com antecedência.</p></div>
+            </li>
+            <li>
+              <span class="preferencias__ic"><svg class="ic" aria-hidden="true"><use href="#i-lua"/></svg></span>
+              <div><h3>Menos estímulos</h3><p>Uma viagem com menos estímulos sensoriais.</p></div>
+            </li>
+            <li>
+              <span class="preferencias__ic"><svg class="ic" aria-hidden="true"><use href="#i-pessoas"/></svg></span>
+              <div><h3>Acompanhante</h3><p>Avise que vai viajar com alguém do seu lado.</p></div>
+            </li>
+            <li>
+              <span class="preferencias__ic"><svg class="ic" aria-hidden="true"><use href="#i-pata"/></svg></span>
+              <div><h3>Cão-guia</h3><p>Seu cão-guia viaja com você.</p></div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="celular" role="img" aria-label="Tela do app DNAVE: Neurodivergente e mobilidade reduzida, com as opções viagem em silêncio e comunicação objetiva ligadas.">
+          <div class="celular__tela" aria-hidden="true">
+            <div class="app__barra"><span>9:41</span></div>
+            <p class="app__voltar">‹ Perfil</p>
+            <p class="app__titulo">Neurodivergente e mobilidade reduzida</p>
+            <p class="app__sub">Preferências de acessibilidade e atendimento</p>
+            <ul class="app__lista">
+              <li><span>Viagem em silêncio</span><i class="chave chave--on"></i></li>
+              <li><span>Comunicação objetiva</span><i class="chave chave--on"></i></li>
+              <li><span>Menos estímulos</span><i class="chave"></i></li>
+              <li><span>Vou com acompanhante</span><i class="chave"></i></li>
+              <li><span>Vou com cão-guia</span><i class="chave"></i></li>
+            </ul>
+            <p class="app__botao">Salvar preferências</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. PASSAGEIRO E COMÉRCIO LOCAL -->
+    <section class="secao tema-escuro" id="passageiro" aria-labelledby="pas-titulo">
+      <div class="wrap duas-colunas duas-colunas--foto">
+        <div>
+          <p class="sobre">Para o passageiro</p>
+          <h2 id="pas-titulo">Esqueceu alguma coisa? Compre no caminho.</h2>
+          <p class="cabeca__lead">Aqui o motorista também é empreendedor e tem a própria loja no app.</p>
+
+          <ol class="passos" data-validar="Loja do motorista, QR Code e cashback ativos (sem mostrar valores)">
+            <li>
+              <span class="passos__ic"><svg class="ic" aria-hidden="true"><use href="#i-loja"/></svg></span>
+              <div><h3>Loja do motorista</h3><p>Cada motorista pode ter a sua vitrine no app.</p></div>
+            </li>
+            <li>
+              <span class="passos__ic"><svg class="ic" aria-hidden="true"><use href="#i-qr"/></svg></span>
+              <div><h3>QR Code no banco</h3><p>Escaneie o código no encosto do banco da frente.</p></div>
+            </li>
+            <li>
+              <span class="passos__ic"><svg class="ic" aria-hidden="true"><use href="#i-sacola"/></svg></span>
+              <div><h3>Compra no caminho</h3><p>Escolha o produto e receba ali mesmo, durante a corrida.</p></div>
+            </li>
+            <li>
+              <span class="passos__ic"><svg class="ic" aria-hidden="true"><use href="#i-cashback"/></svg></span>
+              <div><h3>Cashback</h3><p>E ainda volta cashback pra você.</p></div>
+            </li>
+          </ol>
+        </div>
+        <img class="foto-alta" src="assets/img/passageiro.jpg" width="900" height="1600" loading="lazy"
+             alt="Rapaz sorrindo enquanto usa o celular numa calçada iluminada à noite.">
+      </div>
+
+      <div class="wrap">
+        <div class="comercio" data-validar="Venda e entrega para o comércio local: como o negócio entra">
+          <img class="comercio__foto" src="assets/img/comercio.jpg" width="1200" height="676" loading="lazy"
+               alt="Sacola preta com a marca DNAVE apoiada num degrau da calçada.">
+          <div class="comercio__texto">
+            <p class="sobre sobre--escuro">Para o comércio local</p>
+            <h3>Tem um negócio? Seu negócio vende e entrega pela DNAVE.</h3>
+            <p>Sua loja no app, com a entrega feita por quem já está rodando pela cidade.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. MOTORISTA EMPREENDEDOR + DNAVE ACADEMY -->
+    <section class="secao tema-claro" id="motorista" aria-labelledby="mot-titulo">
+      <div class="wrap duas-colunas duas-colunas--foto duas-colunas--inverte">
+        <img class="foto-alta" src="assets/img/motorista.jpg" width="900" height="1350" loading="lazy"
+             alt="Motorista sorrindo no banco do carro e mostrando a tela do celular.">
+        <div>
+          <p class="sobre">Motorista empreendedor</p>
+          <h2 id="mot-titulo">Mais oportunidades a cada corrida.</h2>
+          <p class="cabeca__lead">Na DNAVE, quem dirige tem autonomia e mais de uma forma de fazer negócio.</p>
+
+          <ul class="recursos" data-validar="Recursos do motorista e parceiros ativos no lançamento">
+            <li>
+              <span class="recursos__ic"><svg class="ic" aria-hidden="true"><use href="#i-pino"/></svg></span>
+              <h3>Escolha a região</h3>
+              <p>Você define onde quer rodar.</p>
+            </li>
+            <li>
+              <span class="recursos__ic"><svg class="ic" aria-hidden="true"><use href="#i-pacote"/></svg></span>
+              <h3>Corrida e entrega</h3>
+              <p>Leve passageiros e faça entregas no mesmo app.</p>
+            </li>
+            <li>
+              <span class="recursos__ic"><svg class="ic" aria-hidden="true"><use href="#i-loja"/></svg></span>
+              <h3>Loja própria</h3>
+              <p>Venda seus produtos para quem está no banco de trás.</p>
+            </li>
+            <li>
+              <span class="recursos__ic"><svg class="ic" aria-hidden="true"><use href="#i-parceiro"/></svg></span>
+              <h3>Benefícios com parceiros</h3>
+              <ul class="parceiros">
+                <li><svg class="ic" aria-hidden="true"><use href="#i-gota"/></svg>Lava-jato</li>
+                <li><svg class="ic" aria-hidden="true"><use href="#i-parceiro"/></svg>Oficina</li>
+                <li><svg class="ic" aria-hidden="true"><use href="#i-bomba"/></svg>Posto e eletroposto</li>
+                <li><svg class="ic" aria-hidden="true"><use href="#i-guincho"/></svg>Guincho 24h</li>
+              </ul>
+            </li>
+          </ul>
+
+          <div class="acoes" data-validar="Link de cadastro de motoristas">
+            <a class="btn btn--escuro" href="#" data-pendente="O cadastro de motoristas abre aqui no lançamento.">
+              Quero dirigir com a DNAVE
+              <svg class="ic" aria-hidden="true"><use href="#i-seta"/></svg>
+            </a>
+          </div>
+          <p class="aviso" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <div class="academy tema-escuro" data-validar="DNAVE Academy e trilhas disponíveis no lançamento">
+          <div class="academy__cabeca">
+            <span class="academy__ic"><svg class="ic" aria-hidden="true"><use href="#i-capelo"/></svg></span>
+            <div>
+              <p class="sobre">DNAVE Academy</p>
+              <h3>Preparar quem dirige é valorizar quem viaja.</h3>
+              <p>Formação para quem dirige com a DNAVE, com trilhas de aprendizagem e avaliações.</p>
+            </div>
+          </div>
+          <ul class="trilhas">
+            <li><h4>Atendimento ao passageiro</h4><p>Cordialidade, comunicação e ética.</p></li>
+            <li><h4>Acessibilidade</h4><p>Neurodiversidade, pessoas com deficiência e mobilidade reduzida.</p></li>
+            <li><h4>Atendimento às mulheres</h4><p>Segurança, prevenção de assédio e acolhimento.</p></li>
+            <li><h4>Transporte de pets</h4><p>Higiene, contenção e transporte responsável.</p></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 7. RODAPÉ COM AS LOJAS -->
+  <footer class="rodape tema-escuro" id="baixe" aria-labelledby="baixe-titulo">
+    <div class="wrap rodape__cta">
+      <div>
+        <h2 id="baixe-titulo">Baixe a DNAVE e chame sua primeira corrida.</h2>
+        <p class="cabeca__lead">E se você dirige, cadastre-se: tem lugar pra você.</p>
+      </div>
+      <div class="lojas" data-validar="Links da App Store e do Google Play">
+        <a class="loja" href="#" data-pendente="O link da App Store entra aqui no lançamento.">
+          <svg class="ic" aria-hidden="true"><use href="#i-baixar"/></svg>
+          <span><small>Baixe na</small> App Store</span>
+        </a>
+        <a class="loja" href="#" data-pendente="O link do Google Play entra aqui no lançamento.">
+          <svg class="ic" aria-hidden="true"><use href="#i-baixar"/></svg>
+          <span><small>Disponível no</small> Google Play</span>
+        </a>
+        <a class="btn btn--ambar" href="#motorista">Motorista? Cadastre-se</a>
+      </div>
+      <p class="aviso" role="status" aria-live="polite"></p>
+    </div>
+
+    <div class="wrap rodape__base">
+      <img src="assets/logo/dnave-claro.svg" alt="DNAVE" width="146" height="40" loading="lazy">
+      <p class="rodape__assinatura">DNAVE — Mobilidade que conecta oportunidades.</p>
+      <nav aria-label="Rodapé">
+        <ul>
+          <li><a href="#modalidades">Modalidades</a></li>
+          <li><a href="#categorias">Categorias</a></li>
+          <li><a href="#acessibilidade">Acessibilidade</a></li>
+          <li><a href="#motorista">Motorista</a></li>
+        </ul>
+      </nav>
+      <p class="rodape__copy">© 2026 DNAVE. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <div class="revisao-faixa" hidden>
+    <strong>Modo revisão.</strong> O contorno tracejado marca o que o cliente precisa confirmar antes de publicar.
+  </div>
+
+  <script src="assets/js/legenda.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

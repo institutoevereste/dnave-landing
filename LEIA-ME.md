@@ -15,14 +15,13 @@ Acrescente `?revisao` ou `#revisao` ao endereço (ex.: `index.html?revisao`; no 
 | Texto da DNAVE Rainbow | `index.html`, cartão `.categoria--rainbow` |
 | Imagem de compartilhamento | `index.html`, `og:image`: usar a URL completa do domínio |
 | Liberar o Google (no dia do lançamento) | `index.html`, apagar a linha `<meta name="robots" content="noindex, nofollow">` |
-| Vídeo novo, sem táxi | O app não tem táxi nem transfer, mas o vídeo atual cita táxi entre 0:08 e 0:17. Quando a versão nova sair, trocar os dois `.mp4` e o `.vtt` em `assets/video/`, as falas em `assets/js/legenda.js` e a transcrição em `index.html` (`.transcricao`). Depois, tirar o `data-validar` do `<figure class="filme">` |
 | Faixas de distância da aba Explorar | `index.html`, seção `#explorar`: os valores 1, 3, 5 e 10 km na tela do celular são exemplos. Trocar pelas faixas reais do app |
 
 Link com `href="#"` e `data-pendente` mostra um aviso em vez de abrir. Basta trocar o `href` que ele volta a ser um link normal.
 
 ## Arquivos
 
-- `assets/video/`: vídeo de lançamento em 16:9 (desktop e tablet) e 9:16 (celular até 767 px), recomprimidos para a web a partir de `video-dnave/out/`. A legenda `.vtt` veio do `.srt`.
+- `assets/video/`: vídeo de lançamento v3 (sem táxi) em 16:9 (desktop e tablet) e 9:16 (celular até 767 px), recomprimidos para a web a partir de `video-dnave/out/`. A legenda `.vtt` veio do `.srt`. Ao trocar o vídeo, troque junto o `.vtt`, as falas em `assets/js/legenda.js` e a transcrição em `index.html` (`.transcricao`).
 - `assets/js/legenda.js`: as mesmas falas da legenda. Quando a página abre direto do disco (`file://`), o navegador bloqueia o `.vtt`, e a legenda entra por esse arquivo.
 - `assets/logo/`: logo em SVG gerado de `video-dnave/src/brand/logoPaths.ts`.
 - `assets/img/`: fotos de `video-dnave/public/img` e um quadro de `public/video/accessible_car.mp4`, reduzidas.

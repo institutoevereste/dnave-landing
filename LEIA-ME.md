@@ -15,6 +15,8 @@ Acrescente `?revisao` ou `#revisao` ao endereço (ex.: `index.html?revisao`; no 
 | Texto da DNAVE Rainbow | `index.html`, cartão `.categoria--rainbow` |
 | Imagem de compartilhamento | `index.html`, `og:image`: usar a URL completa do domínio |
 | Liberar o Google (no dia do lançamento) | `index.html`, apagar a linha `<meta name="robots" content="noindex, nofollow">` |
+| Vídeo novo, sem táxi | O app não tem táxi nem transfer, mas o vídeo atual cita táxi entre 0:08 e 0:17. Quando a versão nova sair, trocar os dois `.mp4` e o `.vtt` em `assets/video/`, as falas em `assets/js/legenda.js` e a transcrição em `index.html` (`.transcricao`). Depois, tirar o `data-validar` do `<figure class="filme">` |
+| Faixas de distância da aba Explorar | `index.html`, seção `#explorar`: os valores 1, 3, 5 e 10 km na tela do celular são exemplos. Trocar pelas faixas reais do app |
 
 Link com `href="#"` e `data-pendente` mostra um aviso em vez de abrir. Basta trocar o `href` que ele volta a ser um link normal.
 

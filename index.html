@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DNAVE — Mobilidade que conecta oportunidades</title>
-  <meta name="description" content="Chegou a DNAVE: corridas de carro, moto e táxi, categorias Mulher, Pet, Inclusiva e Rainbow, compras no caminho e um motorista que também é empreendedor. Tudo num app só.">
+  <meta name="description" content="Chegou a DNAVE: corridas de carro e moto, categorias Mulher, Pet, Inclusiva e Rainbow, a aba Explorar com restaurantes e pontos turísticos por perto, compras no caminho e um motorista que também é empreendedor. Tudo num app só.">
   <meta name="theme-color" content="#1A1B21">
   <!-- Prévia antes do lançamento: buscadores não indexam. Remover no dia do lançamento. -->
   <meta name="robots" content="noindex, nofollow">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:title" content="DNAVE — Mobilidade que conecta oportunidades">
-  <meta property="og:description" content="Carro, moto ou táxi. Categorias para cada jeito de se mover. Tudo num app só.">
+  <meta property="og:description" content="Carro ou moto, categorias para cada jeito de se mover e a aba Explorar. Tudo num app só.">
   <!-- A VALIDAR: og:image precisa de URL absoluta quando o domínio estiver definido. -->
   <meta property="og:image" content="assets/img/poster-16x9.jpg">
   <link rel="icon" href="assets/logo/simbolo.svg" type="image/svg+xml">
@@ -28,7 +28,10 @@
       <symbol id="i-carro" viewBox="0 0 24 24"><path d="M5 17H4a1 1 0 0 1-1-1v-3.5L5.2 7.4A2 2 0 0 1 7 6h10a2 2 0 0 1 1.8 1.4L21 12.5V16a1 1 0 0 1-1 1h-1"/><path d="M9 17h6M3.5 12h17"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></symbol>
       <symbol id="i-estrela" viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></symbol>
       <symbol id="i-moto" viewBox="0 0 24 24"><circle cx="5" cy="16" r="3"/><circle cx="19" cy="16" r="3"/><path d="m5 16 3.5-6h6L19 16"/><path d="m13 6 1.5 4M12 6h3M8.5 10H5"/></symbol>
-      <symbol id="i-taxi" viewBox="0 0 24 24"><path d="M5 18H4a1 1 0 0 1-1-1v-3.5L5.2 8.4A2 2 0 0 1 7 7h10a2 2 0 0 1 1.8 1.4L21 13.5V17a1 1 0 0 1-1 1h-1"/><path d="M9 18h6M3.5 13h17M10 7V4h4v3"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></symbol>
+      <symbol id="i-bussola" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></symbol>
+      <symbol id="i-talheres" viewBox="0 0 24 24"><path d="M5 3v5a2 2 0 0 0 4 0V3M7 3v18"/><path d="M18 21V3c-2.2 1.4-3.5 4-3.5 7.5V14H18"/></symbol>
+      <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></symbol>
+      <symbol id="i-raio" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
       <symbol id="i-escudo" viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="m9 12 2 2 4-4"/></symbol>
       <symbol id="i-compartilhar" viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.4M8.2 13.2l7.6 4.4"/></symbol>
       <symbol id="i-coracao" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></symbol>
@@ -69,6 +72,7 @@
           <li><a href="#modalidades">Modalidades</a></li>
           <li><a href="#categorias">Categorias</a></li>
           <li><a href="#acessibilidade">Acessibilidade</a></li>
+          <li><a href="#explorar">Explorar</a></li>
           <li><a href="#passageiro">Compre no caminho</a></li>
           <li><a href="#motorista">Motorista</a></li>
         </ul>
@@ -89,7 +93,7 @@
         <div class="hero__texto">
           <p class="sobre">Chegou a DNAVE</p>
           <h1 id="hero-titulo"><span class="hero__marca">DNAVE —</span> Mobilidade que conecta <em>oportunidades.</em></h1>
-          <p class="hero__lead">Carro, moto ou táxi. Categorias para cada jeito de se mover. Compras no caminho e um motorista que também é empreendedor. Tudo num app só.</p>
+          <p class="hero__lead">Carro ou moto. Categorias para cada jeito de se mover. Restaurantes e passeios por perto na aba Explorar. Compras no caminho e um motorista que também é empreendedor. Tudo num app só.</p>
           <div class="acoes">
             <a class="btn btn--ambar" href="#baixe">
               <svg class="ic" aria-hidden="true"><use href="#i-baixar"/></svg>
@@ -102,7 +106,7 @@
           </div>
         </div>
 
-        <figure class="filme">
+        <figure class="filme" data-validar="Vídeo, legenda e transcrição ainda citam táxi (0:08–0:17)">
           <div class="filme__quadro">
             <video id="filme" class="filme__video" controls playsinline muted preload="metadata"
                    poster="assets/img/poster-16x9.jpg"
@@ -148,7 +152,7 @@
           <div>
             <p class="sobre">Modalidades</p>
             <h2 id="mod-titulo">Do jeito que cabe no seu dia.</h2>
-            <p class="cabeca__lead">De carro, de moto ou de táxi. Você escolhe como quer ir.</p>
+            <p class="cabeca__lead">De carro ou de moto. Você escolhe como quer ir.</p>
           </div>
           <img class="cabeca__foto" src="assets/img/carro.jpg" width="1400" height="934" loading="lazy"
                alt="Carro preto com a marca DNAVE na porta e grafismos brancos na lateral.">
@@ -174,11 +178,6 @@
             <span class="modalidade__ic"><svg class="ic" aria-hidden="true"><use href="#i-moto"/></svg></span>
             <h3>Moto</h3>
             <p>Viagem individual de motocicleta.</p>
-          </li>
-          <li class="modalidade">
-            <span class="modalidade__ic"><svg class="ic" aria-hidden="true"><use href="#i-taxi"/></svg></span>
-            <h3>Táxi</h3>
-            <p>Os taxistas da sua cidade, direto no app.</p>
           </li>
         </ul>
         <p class="rodape-nota">A oferta de cada modalidade pode variar de cidade para cidade.</p>
@@ -296,8 +295,56 @@
       </div>
     </section>
 
-    <!-- 5. PASSAGEIRO E COMÉRCIO LOCAL -->
-    <section class="secao tema-escuro" id="passageiro" aria-labelledby="pas-titulo">
+    <!-- 5. ABA EXPLORAR -->
+    <section class="secao tema-escuro" id="explorar" aria-labelledby="exp-titulo">
+      <div class="wrap duas-colunas">
+        <div>
+          <p class="sobre">Aba Explorar <span class="selo selo--novo">Novo</span></p>
+          <h2 id="exp-titulo">Descubra o que tem de bom perto de você.</h2>
+          <p class="cabeca__lead">Na aba Explorar, você encontra restaurantes e pontos turísticos por perto, com a avaliação do Google atualizada em tempo real.</p>
+
+          <ul class="passos">
+            <li>
+              <span class="passos__ic"><svg class="ic" aria-hidden="true"><use href="#i-talheres"/></svg></span>
+              <div><h3>Restaurantes</h3><p>Onde comer perto de onde você está.</p></div>
+            </li>
+            <li>
+              <span class="passos__ic"><svg class="ic" aria-hidden="true"><use href="#i-camera"/></svg></span>
+              <div><h3>Pontos turísticos</h3><p>Passeios e lugares para conhecer na cidade.</p></div>
+            </li>
+            <li>
+              <span class="passos__ic"><svg class="ic" aria-hidden="true"><use href="#i-raio"/></svg></span>
+              <div><h3>Você escolhe a distância</h3><p>Troque a faixa de distância e veja o que fica mais perto ou mais longe.</p></div>
+            </li>
+            <li>
+              <span class="passos__ic"><svg class="ic" aria-hidden="true"><use href="#i-estrela"/></svg></span>
+              <div><h3>Avaliação do Google</h3><p>A nota de cada lugar, atualizada em tempo real.</p></div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="celular" role="img" data-validar="Faixas de distância e lugares da tela são exemplos"
+             aria-label="Tela do app DNAVE na aba Explorar: restaurantes num raio de 3 km, cada um com a sua nota no Google.">
+          <div class="celular__tela" aria-hidden="true">
+            <div class="app__barra"><span>9:41</span></div>
+            <p class="app__titulo">Explorar</p>
+            <p class="app__sub">Perto de você</p>
+            <p class="app__abas"><span class="ativo">Restaurantes</span><span>Pontos turísticos</span></p>
+            <p class="app__faixas"><span>1 km</span><span class="ativo">3 km</span><span>5 km</span><span>10 km</span></p>
+            <ul class="app__lugares">
+              <li><span class="app__foto app__foto--1"><svg class="ic"><use href="#i-talheres"/></svg></span><span><b>Cantina da Praça</b><small>Italiana · 1,2 km</small></span><em>★ 4,7<small>Google</small></em></li>
+              <li><span class="app__foto app__foto--2"><svg class="ic"><use href="#i-talheres"/></svg></span><span><b>Mercado Central</b><small>Regional · 2,1 km</small></span><em>★ 4,6<small>Google</small></em></li>
+              <li><span class="app__foto app__foto--3"><svg class="ic"><use href="#i-talheres"/></svg></span><span><b>Café do Mirante</b><small>Café · 2,8 km</small></span><em>★ 4,8<small>Google</small></em></li>
+              <li><span class="app__foto app__foto--1"><svg class="ic"><use href="#i-talheres"/></svg></span><span><b>Sabor da Serra</b><small>Mineira · 2,9 km</small></span><em>★ 4,5<small>Google</small></em></li>
+            </ul>
+            <p class="app__aovivo"><i></i>Notas do Google atualizadas agora</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. PASSAGEIRO E COMÉRCIO LOCAL -->
+    <section class="secao secao--emenda tema-escuro" id="passageiro" aria-labelledby="pas-titulo">
       <div class="wrap duas-colunas duas-colunas--foto">
         <div>
           <p class="sobre">Para o passageiro</p>
@@ -340,7 +387,7 @@
       </div>
     </section>
 
-    <!-- 6. MOTORISTA EMPREENDEDOR + DNAVE ACADEMY -->
+    <!-- 7. MOTORISTA EMPREENDEDOR + DNAVE ACADEMY -->
     <section class="secao tema-claro" id="motorista" aria-labelledby="mot-titulo">
       <div class="wrap duas-colunas duas-colunas--foto duas-colunas--inverte">
         <img class="foto-alta" src="assets/img/motorista.jpg" width="900" height="1350" loading="lazy"
@@ -409,7 +456,7 @@
     </section>
   </main>
 
-  <!-- 7. RODAPÉ COM AS LOJAS -->
+  <!-- 8. RODAPÉ COM AS LOJAS -->
   <footer class="rodape tema-escuro" id="baixe" aria-labelledby="baixe-titulo">
     <div class="wrap rodape__cta">
       <div>
@@ -438,6 +485,7 @@
           <li><a href="#modalidades">Modalidades</a></li>
           <li><a href="#categorias">Categorias</a></li>
           <li><a href="#acessibilidade">Acessibilidade</a></li>
+          <li><a href="#explorar">Explorar</a></li>
           <li><a href="#motorista">Motorista</a></li>
         </ul>
       </nav>

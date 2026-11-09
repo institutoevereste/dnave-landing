@@ -205,7 +205,13 @@ h3 { font-size: 1.25rem; }
 /* ---------- Categorias ---------- */
 .categorias { display: grid; gap: 16px; }
 @media (min-width: 720px) { .categorias { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; } }
-@media (min-width: 1200px) { .categorias { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+/* 5 categorias: no tablet o 5º card fica centralizado; no desktop ficam 3 + 2 centralizados, todos da mesma largura */
+@media (min-width: 720px) and (max-width: 1199px) { .categoria:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 10px); } }
+@media (min-width: 1200px) {
+  .categorias { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .categoria { grid-column: span 2; }
+  .categoria:nth-child(4) { grid-column: 2 / span 2; }
+}
 .categoria { background: var(--grafite-2); border: 1px solid var(--linha-escura); border-radius: var(--raio); overflow: hidden; display: flex; flex-direction: column; }
 .categoria__foto { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
 .categoria__corpo { padding: 22px 22px 26px; display: grid; gap: 10px; align-content: start; }

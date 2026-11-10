@@ -2,8 +2,6 @@
 (function () {
   "use strict";
 
-  var reduzMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
   // ---------- Menu do celular ----------
   var botaoMenu = document.querySelector(".topo__menu");
   var menu = document.getElementById("menu");
@@ -93,11 +91,8 @@
     if (trilha.track) trilha.track.mode = "showing";
   }
 
-  // Começa sem som, com legenda, e oferece o som. Quem pediu menos movimento dá o play.
-  if (!reduzMovimento) {
-    var p = video.play();
-    if (p && p.catch) p.catch(function () { /* autoplay bloqueado: fica o pôster com os controles */ });
-  }
+  // O vídeo não começa sozinho ao abrir a página (ele fica abaixo do topo e pesa no celular).
+  // No computador, o fx.js liga a prévia sem som quando o vídeo entra na tela. O botão oferece o som.
   botaoSom.hidden = false;
   botaoSom.addEventListener("click", function () {
     video.muted = false;

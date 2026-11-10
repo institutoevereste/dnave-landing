@@ -27,7 +27,9 @@
 .js .rv.visto { opacity: 1; translate: 0 0; }
 
 /* ---------- Cartões que inclinam com o ponteiro ---------- */
-[data-tilt] { position: relative; transform: perspective(900px) rotateX(var(--tx, 0deg)) rotateY(var(--ty, 0deg)); transform-style: preserve-3d; }
+[data-tilt] { position: relative; transform: perspective(900px) rotateX(var(--tx, 0deg)) rotateY(var(--ty, 0deg)); }
+/* 3D de verdade só onde uma peça salta do cartão; nos celulares de demonstração o conteúdo fica plano (Safari) */
+.modalidade[data-tilt], .categoria[data-tilt] { transform-style: preserve-3d; }
 [data-tilt]::after {
   content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .25s;
   background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, .16), transparent 55%);
@@ -53,15 +55,15 @@
 @keyframes pista { to { transform: translateY(80px); } }
 
 /* ---------- Hero 3D ---------- */
-.hero--3d { padding-block: 32px 0; }
+.hero--3d { padding-block: 32px 28px; }
 .hero--3d .hero__grid { z-index: 1; }
 .hero--3d .hero__texto { position: relative; z-index: 2; }
 @media (min-width: 960px) {
-  .hero--3d { padding-block: 24px 0; }
+  .hero--3d { padding-block: 24px 28px; }
   .hero--3d .hero__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px; }
 }
 
-.palco { position: relative; height: 560px; perspective: 1300px; perspective-origin: 50% 42%; }
+.palco { position: relative; height: 580px; perspective: 1300px; perspective-origin: 50% 42%; }
 .palco__cena { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(var(--rx, 5deg)) rotateY(var(--ry, -14deg)); will-change: transform; }
 @media (min-width: 960px) { .palco { height: 660px; } }
 @media (min-width: 1200px) { .palco { height: 720px; } }
@@ -71,65 +73,59 @@
 .palco__rota path { fill: none; stroke: var(--ambar); stroke-width: 3.5; stroke-linecap: round; stroke-dasharray: 16 12; animation: rota 1.4s linear infinite; }
 @keyframes rota { to { stroke-dashoffset: -28; } }
 
-/* celular com a tela nova do app: a tela é montada em 390 × 844 (como no Figma) e reduzida por --k */
+/* celular com a tela nova do app: as medidas são as do Figma (390 × 844), multiplicadas por --k no layout */
 .fone {
   --k: .58;
   position: absolute; left: 50%; top: 50%;
   width: calc(390px * var(--k) + 20px); height: calc(844px * var(--k) + 20px);
   margin: calc((844px * var(--k) + 20px) / -2) 0 0 calc((390px * var(--k) + 20px) / -2);
   padding: 10px; border-radius: 40px; background: #0E0F13;
-  box-shadow: 0 0 0 1px var(--app-borda), inset 0 0 0 1px rgba(240, 240, 240, .06);
-  transform-style: preserve-3d;
+  box-shadow: 0 0 0 1px var(--app-borda), inset 0 0 0 1px rgba(240, 240, 240, .06), 0 50px 90px rgba(0, 0, 0, .6), 0 0 70px rgba(233, 158, 9, .22);
+  --u: calc(1px * var(--k)); /* 1 px da tela do Figma, já reduzido */
 }
-/* espessura do aparelho + sombra e halo no chão */
-.fone::before { content: ""; position: absolute; inset: 0; border-radius: inherit; background: #08090C; transform: translateZ(-18px); box-shadow: 0 50px 90px rgba(0, 0, 0, .6), 0 0 70px rgba(233, 158, 9, .22); }
+/* O celular é uma peça plana da cena: no Safari, 3D aninhado + filho com transform some atrás do fundo. */
 .fone__tela { position: relative; width: calc(390px * var(--k)); height: calc(844px * var(--k)); border-radius: 31px; overflow: hidden; background: var(--app-fundo); }
 @media (min-width: 960px) { .fone { --k: .66; left: 55%; border-radius: 44px; } .fone__tela { border-radius: 35px; } }
 @media (min-width: 1200px) { .fone { --k: .72; } }
 
-/* ----- Tela "Escolha uma viagem" (medidas do Figma, em px lógicos) ----- */
-.app { position: relative; width: 390px; height: 844px; transform: scale(var(--k)); transform-origin: 0 0; background: var(--app-fundo); color: var(--app-txt); font-family: var(--mont); line-height: 1.22; }
+/* ----- Tela "Escolha uma viagem" (medidas do Figma × --u; sem transform, por causa do Safari) ----- */
+.app { position: relative; width: calc(390 * var(--u)); height: calc(844 * var(--u)); background: var(--app-fundo); color: var(--app-txt); font-family: var(--mont); line-height: 1.22; }
 .app p { margin: 0; }
-.app-mapa { position: absolute; left: 0; top: 0; width: 390px; height: 390px; overflow: hidden; }
-.app-mapa img { width: 390px; height: 390px; max-width: none; }
-/* a NAVE percorre a rota do mapa depois do "Confirmar" */
-.app-nave {
-  position: absolute; left: 0; top: 0; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; opacity: 0;
-  background: var(--app-txt); box-shadow: 0 0 0 5px rgba(240, 240, 240, .22), 0 0 18px var(--ambar);
-  offset-path: path("M92 300C130.667 260 166.667 235 200 225C233.333 215 266.667 180 300 120"); offset-distance: 0%; offset-rotate: 0deg;
-}
-.app.chamando .app-nave { opacity: 1; animation: nave 2.4s ease-in-out forwards; }
-@keyframes nave { to { offset-distance: 100%; } }
-.app-voltar { position: absolute; left: 20px; top: 20px; width: 44px; height: 44px; border-radius: 22px; background: var(--app-txt); display: grid; place-items: center; }
-.app-voltar img { width: 22px; height: 22px; }
-.app-painel { position: absolute; left: 0; top: 366px; width: 390px; height: 478px; padding: 10px 0 20px; border-radius: 24px 24px 0 0; background: var(--app-fundo); display: flex; flex-direction: column; align-items: center; gap: 8px; overflow: hidden; }
-.app-alca { flex: none; width: 40px; height: 4px; border-radius: 2px; background: var(--app-alca); }
-.app-titulo { align-self: stretch; padding: 6px 20px 0; font-weight: 700; font-size: 18px; }
-.app-lista { flex: 1 1 0; min-height: 0; align-self: stretch; overflow: hidden auto; padding: 0 8px 8px; scrollbar-width: none; }
+.app-mapa { position: absolute; left: 0; top: 0; width: calc(390 * var(--u)); height: calc(390 * var(--u)); overflow: hidden; }
+.app-mapa img { width: calc(390 * var(--u)); height: calc(390 * var(--u)); max-width: none; }
+/* a NAVE percorre a rota do mapa depois do "Confirmar": círculo num SVG por cima do mapa, animado pelo próprio SVG */
+.app-rota { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+.app-nave { opacity: 0; }
+.app.viajando .app-nave { opacity: 1; }
+.app-voltar { position: absolute; left: calc(20 * var(--u)); top: calc(20 * var(--u)); width: calc(44 * var(--u)); height: calc(44 * var(--u)); border-radius: calc(22 * var(--u)); background: var(--app-txt); display: grid; place-items: center; }
+.app-voltar img { width: calc(22 * var(--u)); height: calc(22 * var(--u)); }
+.app-painel { position: absolute; left: 0; top: calc(366 * var(--u)); width: calc(390 * var(--u)); height: calc(478 * var(--u)); padding: calc(10 * var(--u)) 0 calc(20 * var(--u)); border-radius: calc(24 * var(--u)) calc(24 * var(--u)) 0 0; background: var(--app-fundo); display: flex; flex-direction: column; align-items: center; gap: calc(8 * var(--u)); overflow: hidden; }
+.app-alca { flex: none; width: calc(40 * var(--u)); height: calc(4 * var(--u)); border-radius: calc(2 * var(--u)); background: var(--app-alca); }
+.app-titulo { align-self: stretch; padding: calc(6 * var(--u)) calc(20 * var(--u)) 0; font-weight: 700; font-size: calc(18 * var(--u)); }
+.app-lista { flex: 1 1 0; min-height: 0; align-self: stretch; overflow: hidden auto; padding: 0 calc(8 * var(--u)) calc(8 * var(--u)); scrollbar-width: none; }
 .app-lista::-webkit-scrollbar { display: none; }
-.app-secao { padding: 14px 12px 6px; font-weight: 700; font-size: 13px; letter-spacing: .78px; text-transform: uppercase; color: var(--ambar); }
+.app-secao { padding: calc(14 * var(--u)) calc(12 * var(--u)) calc(6 * var(--u)); font-weight: 700; font-size: calc(13 * var(--u)); letter-spacing: calc(.78 * var(--u)); text-transform: uppercase; color: var(--ambar); }
 .linha {
-  display: flex; align-items: center; gap: 14px; width: 100%; min-height: 88px; padding: 8px 12px 8px 4px;
-  border: 2px solid transparent; border-radius: 14px; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer;
+  display: flex; align-items: center; gap: calc(14 * var(--u)); width: 100%; min-height: calc(88 * var(--u)); padding: calc(8 * var(--u)) calc(12 * var(--u)) calc(8 * var(--u)) calc(4 * var(--u));
+  border: calc(2 * var(--u)) solid transparent; border-radius: calc(14 * var(--u)); background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer;
 }
 .linha[aria-pressed="true"] { background: var(--app-sel); border-color: var(--ambar); }
-.linha__ic { flex: none; width: 84px; height: 58px; object-fit: contain; }
+.linha__ic { flex: none; width: calc(84 * var(--u)); height: calc(58 * var(--u)); object-fit: contain; }
 /* categoria sem ilustração no Figma: só o selo redondo, no mesmo desenho dos outros ícones */
 .linha__ic--selo { display: grid; place-items: center; }
-.linha__ic--selo i { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--app-txt); color: var(--ambar); }
-.linha__ic--selo .ic { width: 24px; height: 24px; }
-.linha__txt { display: grid; gap: 2px; min-width: 0; flex: 1; }
-.linha__txt b { font-weight: 700; font-size: 16px; }
-.linha__txt span { font-size: 13px; color: var(--app-txt2); }
-.linha__txt small { font-size: 12px; line-height: 1.35; color: var(--app-txt3); }
-.app-outras { padding: 8px 12px 0; font-size: 12px; color: var(--app-txt3); }
-.app-acao { padding: 10px 12px 4px; }
-.app-vermais { display: flex; align-items: center; justify-content: center; gap: 8px; width: 350px; height: 48px; border-radius: 14px; border: 1.5px solid var(--app-borda); background: transparent; color: var(--app-txt); font: 600 15px/1 var(--mont); cursor: pointer; }
-.app-vermais img { width: 18px; height: 18px; transition: transform .2s; }
-.app-vermais[aria-expanded="true"] img { transform: rotate(180deg); }
-.app-rodape { align-self: stretch; padding: 4px 16px 0; }
-.app-confirmar { width: 358px; height: 56px; border: 0; border-radius: 14px; background: var(--ambar); color: #1A1B21; font: 700 17px/1 var(--mont); cursor: pointer; }
-.app :focus-visible { outline-offset: -3px; border-radius: 14px; }
+.linha__ic--selo i { display: grid; place-items: center; width: calc(44 * var(--u)); height: calc(44 * var(--u)); border-radius: 50%; border: calc(2 * var(--u)) solid var(--app-txt); color: var(--ambar); }
+.linha__ic--selo .ic { width: calc(24 * var(--u)); height: calc(24 * var(--u)); }
+.linha__txt { display: grid; gap: calc(2 * var(--u)); min-width: 0; flex: 1; }
+.linha__txt b { font-weight: 700; font-size: calc(16 * var(--u)); }
+.linha__txt span { font-size: calc(13 * var(--u)); color: var(--app-txt2); }
+.linha__txt small { font-size: calc(12 * var(--u)); line-height: 1.35; color: var(--app-txt3); }
+.app-outras { padding: calc(8 * var(--u)) calc(12 * var(--u)) 0; font-size: calc(12 * var(--u)); color: var(--app-txt3); }
+.app-acao { padding: calc(10 * var(--u)) calc(12 * var(--u)) calc(4 * var(--u)); }
+.app-vermais { display: flex; align-items: center; justify-content: center; gap: calc(8 * var(--u)); width: calc(350 * var(--u)); height: calc(48 * var(--u)); border-radius: calc(14 * var(--u)); border: calc(1.5 * var(--u)) solid var(--app-borda); background: transparent; color: var(--app-txt); font: 600 calc(15 * var(--u))/1 var(--mont); cursor: pointer; }
+.app-vermais img { width: calc(18 * var(--u)); height: calc(18 * var(--u)); }
+.app-rodape { align-self: stretch; padding: calc(4 * var(--u)) calc(16 * var(--u)) 0; }
+.app-confirmar { width: calc(358 * var(--u)); height: calc(56 * var(--u)); border: 0; border-radius: calc(14 * var(--u)); background: var(--ambar); color: #1A1B21; font: 700 calc(17 * var(--u))/1 var(--mont); cursor: pointer; }
+.app :focus-visible { outline-offset: calc(-3 * var(--u)); border-radius: calc(14 * var(--u)); }
 
 /* ----- Elementos flutuantes do palco ----- */
 .flut { position: absolute; animation: flutua var(--t, 6s) ease-in-out var(--d, 0s) infinite; }
@@ -165,7 +161,7 @@
 
 /* celular estreito: menos peças e cartões menores, para a tela continuar à vista */
 @media (max-width: 599px) {
-  .palco { height: 520px; }
+  .palco { height: 570px; }
   .cartao3d { min-width: 0; padding-right: 12px; scale: .82; }
   .cartao3d--mulher { left: 0; top: 0; bottom: auto; transform-origin: 0 0; }
   .cartao3d--pet { right: 0; top: 27%; transform-origin: 100% 0; }
@@ -264,3 +260,25 @@ button.chave[aria-checked="true"]::after { left: 21px; }
 
 /* tablet: o cartão do alto não sai pela borda */
 @media (max-width: 959px) { .cartao3d--mob { left: 0; } }
+
+/* ---------- Versão leve: celular, tablet e telas de toque ----------
+   Pedido do cliente (10/11/2026): no celular a página ficou lenta. Aqui não há cena 3D nem animação contínua:
+   a composição do topo fica plana e parada, só os cartões de categoria flutuam (animação simples, na GPU).
+   O fx.js também não liga o giro do palco, a entrada dos blocos ao rolar nem a prévia automática do vídeo. */
+@media (hover: none), (pointer: coarse), (max-width: 959px) {
+  .progresso { display: none; }
+  .pista__grade::before { animation: none; }
+  .palco { perspective: none; }
+  .palco__cena { transform: none; transform-style: flat; will-change: auto; }
+  .palco__brilho, .palco__rota, .ficha, .pino, .cartao3d { transform: none; }
+  .palco__rota, .pino, .ficha--d { filter: none; }
+  .palco__rota path, .flut { animation: none; }
+  .cartao3d { animation: flutua var(--t, 6s) ease-in-out var(--d, 0s) infinite; box-shadow: 0 10px 24px rgba(0, 0, 0, .45); }
+  .fone { box-shadow: 0 0 0 1px var(--app-borda), 0 24px 44px rgba(0, 0, 0, .5); }
+  .ficha { box-shadow: 0 8px 18px rgba(0, 0, 0, .45); }
+  .ficha--b { opacity: 1; }
+  .ficha--d { display: none; } /* ficava atrás, desfocada; na composição plana encosta no celular */
+  .palco__brilho { background: radial-gradient(closest-side, rgba(233, 158, 9, .2), transparent 70%); }
+  [data-tilt] { transform: none; }
+  .salta { transform: none; }
+}

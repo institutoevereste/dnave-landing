@@ -17,9 +17,10 @@
   <link rel="icon" href="assets/logo/simbolo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/fx.css">
+  <!-- ?v=N nos arquivos que mudam: aumente o número a cada publicação, para o navegador não usar a cópia antiga -->
+  <link rel="stylesheet" href="assets/css/fx.css?v=2">
   <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
@@ -130,7 +131,7 @@
                 <div class="app" role="group" aria-label="Demonstração da tela Escolha uma viagem, do app DNAVe" data-validar="Tela do app: tempos de exemplo, sem valores">
                   <div class="app-mapa" aria-hidden="true">
                     <img src="assets/app/mapa.svg" alt="" width="390" height="390">
-                    <i class="app-nave"></i>
+                    <svg class="app-rota" viewBox="0 0 390 390" aria-hidden="true"><circle class="app-nave" r="9" fill="#F0F0F0" stroke="#E99E09" stroke-width="4"><animateMotion dur="2.4s" begin="indefinite" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines=".45 0 .55 1" path="M92 300C130.667 260 166.667 235 200 225C233.333 215 266.667 180 300 120"/></circle></svg>
                   </div>
                   <span class="app-voltar" aria-hidden="true"><img src="assets/app/seta-voltar.svg" alt="" width="22" height="22"></span>
                   <div class="app-painel">
@@ -157,11 +158,11 @@
                       <div class="app-mais" hidden>
                         <p class="app-secao">Categorias especiais</p>
                         <button class="linha" type="button" aria-pressed="false" data-cat="Mulher">
-                          <img class="linha__ic" src="assets/app/v-mulher.png" alt="" width="84" height="58">
+                          <img class="linha__ic" src="assets/app/v-mulher.png" alt="" width="84" height="58" loading="lazy">
                           <span class="linha__txt"><b>Mulher</b><span>5 min de distância</span><small>Passageiras e motoristas mulheres</small></span>
                         </button>
                         <button class="linha" type="button" aria-pressed="false" data-cat="Rainbow">
-                          <img class="linha__ic" src="assets/app/v-rainbow.png" alt="" width="84" height="58">
+                          <img class="linha__ic" src="assets/app/v-rainbow.png" alt="" width="84" height="58" loading="lazy">
                           <span class="linha__txt"><b>Rainbow</b><span>5 min de distância</span><small>Para a comunidade LGBTQIA+</small></span>
                         </button>
                         <button class="linha" type="button" aria-pressed="false" data-cat="Neurodivergente">
@@ -169,21 +170,21 @@
                           <span class="linha__txt"><b>Neurodivergente</b><span>7 min de distância</span><small>Motoristas preparados para passageiros neurodivergentes</small></span>
                         </button>
                         <button class="linha" type="button" aria-pressed="false" data-cat="Mobilidade reduzida">
-                          <img class="linha__ic" src="assets/app/v-mobilidade.png" alt="" width="84" height="58">
+                          <img class="linha__ic" src="assets/app/v-mobilidade.png" alt="" width="84" height="58" loading="lazy">
                           <span class="linha__txt"><b>Mobilidade reduzida</b><span>8 min de distância</span><small>Veículos adaptados para mobilidade reduzida</small></span>
                         </button>
                         <button class="linha" type="button" aria-pressed="false" data-cat="Pet">
-                          <img class="linha__ic" src="assets/app/v-pet.png" alt="" width="84" height="58">
+                          <img class="linha__ic" src="assets/app/v-pet.png" alt="" width="84" height="58" loading="lazy">
                           <span class="linha__txt"><b>Pet</b><span>4 min de distância</span><small>Viaje com seu animal de estimação</small></span>
                         </button>
                         <p class="app-secao">Outras opções</p>
                         <button class="linha" type="button" aria-pressed="false" data-cat="Só quero Elétrico">
-                          <img class="linha__ic" src="assets/app/v-eletrico.png" alt="" width="84" height="58">
+                          <img class="linha__ic" src="assets/app/v-eletrico.png" alt="" width="84" height="58" loading="lazy">
                           <span class="linha__txt"><b>Só quero Elétrico</b><span>6 min de distância</span><small>Veículos 100% elétricos</small></span>
                         </button>
                         <p class="app-secao">Entregas</p>
                         <button class="linha" type="button" aria-pressed="false" data-cat="Moto Entrega">
-                          <img class="linha__ic" src="assets/app/v-entrega.png" alt="" width="84" height="58">
+                          <img class="linha__ic" src="assets/app/v-entrega.png" alt="" width="84" height="58" loading="lazy">
                           <span class="linha__txt"><b>Moto Entrega</b><span>3 min de distância</span><small>Envie ou receba encomendas</small></span>
                         </button>
                         <p class="app-outras">Entre outras categorias.</p>
@@ -238,7 +239,7 @@
         </div>
         <figure class="filme">
           <div class="filme__quadro">
-            <video id="filme" class="filme__video" controls playsinline muted preload="metadata"
+            <video id="filme" class="filme__video" controls playsinline muted preload="none"
                    poster="assets/img/poster-16x9.jpg"
                    data-src-largo="assets/video/dnave-lancamento-16x9.mp4"
                    data-src-alto="assets/video/dnave-lancamento-9x16.mp4"
@@ -663,7 +664,7 @@
   </div>
 
   <script src="assets/js/legenda.js" defer></script>
-  <script src="assets/js/main.js" defer></script>
-  <script src="assets/js/fx.js" defer></script>
+  <script src="assets/js/main.js?v=2" defer></script>
+  <script src="assets/js/fx.js?v=2" defer></script>
 </body>
 </html>

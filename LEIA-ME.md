@@ -2,6 +2,15 @@
 
 HTML, CSS e JS sem build. Abra `index.html` direto no navegador (duplo clique) ou publique a pasta inteira em qualquer hospedagem estática.
 
+## Camada 3D (09/11/2026)
+
+O topo virou um palco 3D com a tela nova do app ("Escolha uma viagem", do Figma "Tela de escolha da categoria"). Tudo em CSS 3D, sem biblioteca: `assets/css/fx.css`, `assets/js/fx.js` e `assets/app/` (veículos e peças da tela).
+
+- Demonstrações que funcionam: escolher categoria e confirmar (topo), chaves de preferência (Acessibilidade) e "Qual km você quer?" (Explorar).
+- Quem pede menos movimento no sistema vê a página parada; as demonstrações continuam funcionando.
+- A validar com o cliente (marcado no modo revisão): nomes das categorias na tela do app (seguem as regras da marca, não os do Figma), tempos e lugares de exemplo.
+- Os veículos 3D do Figma têm 126 × 87 px. Com os arquivos @3x do app, dá para usá-los maiores.
+
 ## Modo revisão
 
 Acrescente `?revisao` ou `#revisao` ao endereço (ex.: `index.html?revisao`; no link do Artifact, só `#revisao` funciona). Cada bloco que o cliente precisa confirmar ganha um contorno tracejado com o motivo. Sem o parâmetro, a página fica limpa.

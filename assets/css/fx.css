@@ -1,0 +1,266 @@
+/* DNAVe — landing 3D (camada por cima do style.css)
+   Palco 3D do hero com a tela nova do app (Figma "Tela de escolha da categoria"), cartões que inclinam,
+   luz que segue o ponteiro e demonstrações interativas. Tudo em CSS 3D, sem biblioteca.
+   Quem pede menos movimento (prefers-reduced-motion) vê a mesma página parada: o style.css já zera
+   animações e transições, e o fx.js não liga os efeitos de ponteiro. */
+
+:root {
+  /* variáveis "Dinave / Cores" do Figma */
+  --app-fundo: #1A1B21;
+  --app-sel: #24262E;
+  --app-txt: #F0F0F0;
+  --app-txt2: #C9CBD1;
+  --app-txt3: #8E929C;
+  --app-borda: #3A3D46;
+  --app-alca: #4A4D57;
+}
+
+/* ---------- Linha de progresso da rolagem ---------- */
+.progresso { position: fixed; inset: 0 0 auto; height: 3px; z-index: 60; pointer-events: none; }
+.progresso i { display: block; height: 100%; background: var(--ambar); transform-origin: 0 50%; transform: scaleX(var(--pg, 0)); box-shadow: 0 0 12px rgba(233, 158, 9, .7); }
+
+/* ---------- Luz que segue o ponteiro nas seções escuras ---------- */
+.tema-escuro[data-luz] { background-image: radial-gradient(560px circle at var(--lx, 50%) var(--ly, -30%), rgba(233, 158, 9, .09), transparent 65%); }
+
+/* ---------- Entrada dos blocos ao rolar (só com JS) ---------- */
+.js .rv { opacity: 0; translate: 0 28px; transition: opacity .6s ease, translate .7s cubic-bezier(.2, .7, .2, 1); }
+.js .rv.visto { opacity: 1; translate: 0 0; }
+
+/* ---------- Cartões que inclinam com o ponteiro ---------- */
+[data-tilt] { position: relative; transform: perspective(900px) rotateX(var(--tx, 0deg)) rotateY(var(--ty, 0deg)); transform-style: preserve-3d; }
+[data-tilt]::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .25s;
+  background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, .16), transparent 55%);
+}
+[data-tilt].ativo::after { opacity: 1; }
+.salta { transform: translateZ(46px); }
+
+/* ---------- Pista: chão em perspectiva ---------- */
+.pista {
+  position: absolute; inset: auto 0 0; height: 44%; overflow: hidden; pointer-events: none;
+  perspective: 480px; perspective-origin: 50% 0%;
+  -webkit-mask-image: linear-gradient(180deg, transparent 4%, #000 70%); mask-image: linear-gradient(180deg, transparent 4%, #000 70%);
+}
+.pista__grade { position: absolute; left: -60%; right: -60%; top: 0; height: 260%; transform-origin: 50% 0%; transform: rotateX(74deg); overflow: hidden; }
+.pista__grade::before {
+  content: ""; position: absolute; inset: -80px 0 0;
+  background-image:
+    linear-gradient(90deg, rgba(233, 158, 9, .34) 2px, transparent 2px),
+    linear-gradient(0deg, rgba(240, 240, 240, .13) 2px, transparent 2px);
+  background-size: 80px 80px;
+  animation: pista 2.6s linear infinite;
+}
+@keyframes pista { to { transform: translateY(80px); } }
+
+/* ---------- Hero 3D ---------- */
+.hero--3d { padding-block: 32px 0; }
+.hero--3d .hero__grid { z-index: 1; }
+.hero--3d .hero__texto { position: relative; z-index: 2; }
+@media (min-width: 960px) {
+  .hero--3d { padding-block: 24px 0; }
+  .hero--3d .hero__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px; }
+}
+
+.palco { position: relative; height: 560px; perspective: 1300px; perspective-origin: 50% 42%; }
+.palco__cena { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(var(--rx, 5deg)) rotateY(var(--ry, -14deg)); will-change: transform; }
+@media (min-width: 960px) { .palco { height: 660px; } }
+@media (min-width: 1200px) { .palco { height: 720px; } }
+
+.palco__brilho { position: absolute; left: 50%; top: 48%; width: 560px; height: 560px; margin: -280px 0 0 -280px; border-radius: 50%; background: radial-gradient(closest-side, rgba(233, 158, 9, .3), transparent 70%); transform: translateZ(-240px); }
+.palco__rota { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; transform: translateZ(-150px); filter: drop-shadow(0 0 10px rgba(233, 158, 9, .7)); }
+.palco__rota path { fill: none; stroke: var(--ambar); stroke-width: 3.5; stroke-linecap: round; stroke-dasharray: 16 12; animation: rota 1.4s linear infinite; }
+@keyframes rota { to { stroke-dashoffset: -28; } }
+
+/* celular com a tela nova do app: a tela é montada em 390 × 844 (como no Figma) e reduzida por --k */
+.fone {
+  --k: .58;
+  position: absolute; left: 50%; top: 50%;
+  width: calc(390px * var(--k) + 20px); height: calc(844px * var(--k) + 20px);
+  margin: calc((844px * var(--k) + 20px) / -2) 0 0 calc((390px * var(--k) + 20px) / -2);
+  padding: 10px; border-radius: 40px; background: #0E0F13;
+  box-shadow: 0 0 0 1px var(--app-borda), inset 0 0 0 1px rgba(240, 240, 240, .06);
+  transform-style: preserve-3d;
+}
+/* espessura do aparelho + sombra e halo no chão */
+.fone::before { content: ""; position: absolute; inset: 0; border-radius: inherit; background: #08090C; transform: translateZ(-18px); box-shadow: 0 50px 90px rgba(0, 0, 0, .6), 0 0 70px rgba(233, 158, 9, .22); }
+.fone__tela { position: relative; width: calc(390px * var(--k)); height: calc(844px * var(--k)); border-radius: 31px; overflow: hidden; background: var(--app-fundo); }
+@media (min-width: 960px) { .fone { --k: .66; left: 55%; border-radius: 44px; } .fone__tela { border-radius: 35px; } }
+@media (min-width: 1200px) { .fone { --k: .72; } }
+
+/* ----- Tela "Escolha uma viagem" (medidas do Figma, em px lógicos) ----- */
+.app { position: relative; width: 390px; height: 844px; transform: scale(var(--k)); transform-origin: 0 0; background: var(--app-fundo); color: var(--app-txt); font-family: var(--mont); line-height: 1.22; }
+.app p { margin: 0; }
+.app-mapa { position: absolute; left: 0; top: 0; width: 390px; height: 390px; overflow: hidden; }
+.app-mapa img { width: 390px; height: 390px; max-width: none; }
+/* a NAVE percorre a rota do mapa depois do "Confirmar" */
+.app-nave {
+  position: absolute; left: 0; top: 0; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; opacity: 0;
+  background: var(--app-txt); box-shadow: 0 0 0 5px rgba(240, 240, 240, .22), 0 0 18px var(--ambar);
+  offset-path: path("M92 300C130.667 260 166.667 235 200 225C233.333 215 266.667 180 300 120"); offset-distance: 0%; offset-rotate: 0deg;
+}
+.app.chamando .app-nave { opacity: 1; animation: nave 2.4s ease-in-out forwards; }
+@keyframes nave { to { offset-distance: 100%; } }
+.app-voltar { position: absolute; left: 20px; top: 20px; width: 44px; height: 44px; border-radius: 22px; background: var(--app-txt); display: grid; place-items: center; }
+.app-voltar img { width: 22px; height: 22px; }
+.app-painel { position: absolute; left: 0; top: 366px; width: 390px; height: 478px; padding: 10px 0 20px; border-radius: 24px 24px 0 0; background: var(--app-fundo); display: flex; flex-direction: column; align-items: center; gap: 8px; overflow: hidden; }
+.app-alca { flex: none; width: 40px; height: 4px; border-radius: 2px; background: var(--app-alca); }
+.app-titulo { align-self: stretch; padding: 6px 20px 0; font-weight: 700; font-size: 18px; }
+.app-lista { flex: 1 1 0; min-height: 0; align-self: stretch; overflow: hidden auto; padding: 0 8px 8px; scrollbar-width: none; }
+.app-lista::-webkit-scrollbar { display: none; }
+.app-secao { padding: 14px 12px 6px; font-weight: 700; font-size: 13px; letter-spacing: .78px; text-transform: uppercase; color: var(--ambar); }
+.linha {
+  display: flex; align-items: center; gap: 14px; width: 100%; min-height: 88px; padding: 8px 12px 8px 4px;
+  border: 2px solid transparent; border-radius: 14px; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer;
+}
+.linha[aria-pressed="true"] { background: var(--app-sel); border-color: var(--ambar); }
+.linha__ic { flex: none; width: 84px; height: 58px; object-fit: contain; }
+/* categoria sem ilustração no Figma: só o selo redondo, no mesmo desenho dos outros ícones */
+.linha__ic--selo { display: grid; place-items: center; }
+.linha__ic--selo i { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--app-txt); color: var(--ambar); }
+.linha__ic--selo .ic { width: 24px; height: 24px; }
+.linha__txt { display: grid; gap: 2px; min-width: 0; flex: 1; }
+.linha__txt b { font-weight: 700; font-size: 16px; }
+.linha__txt span { font-size: 13px; color: var(--app-txt2); }
+.linha__txt small { font-size: 12px; line-height: 1.35; color: var(--app-txt3); }
+.app-outras { padding: 8px 12px 0; font-size: 12px; color: var(--app-txt3); }
+.app-acao { padding: 10px 12px 4px; }
+.app-vermais { display: flex; align-items: center; justify-content: center; gap: 8px; width: 350px; height: 48px; border-radius: 14px; border: 1.5px solid var(--app-borda); background: transparent; color: var(--app-txt); font: 600 15px/1 var(--mont); cursor: pointer; }
+.app-vermais img { width: 18px; height: 18px; transition: transform .2s; }
+.app-vermais[aria-expanded="true"] img { transform: rotate(180deg); }
+.app-rodape { align-self: stretch; padding: 4px 16px 0; }
+.app-confirmar { width: 358px; height: 56px; border: 0; border-radius: 14px; background: var(--ambar); color: #1A1B21; font: 700 17px/1 var(--mont); cursor: pointer; }
+.app :focus-visible { outline-offset: -3px; border-radius: 14px; }
+
+/* ----- Elementos flutuantes do palco ----- */
+.flut { position: absolute; animation: flutua var(--t, 6s) ease-in-out var(--d, 0s) infinite; }
+@keyframes flutua { 50% { translate: 0 -14px; } }
+
+.cartao3d {
+  display: flex; align-items: center; gap: 10px; min-width: 214px; padding: 6px 16px 6px 4px;
+  border: 2px solid var(--ambar); border-radius: 16px; background: var(--app-sel); color: var(--app-txt);
+  font: inherit; text-align: left; cursor: pointer;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .5), 0 0 30px rgba(233, 158, 9, .24);
+}
+.cartao3d img { flex: none; width: 84px; height: 58px; }
+.cartao3d span { display: grid; gap: 1px; line-height: 1.2; }
+.cartao3d small { font-size: .6875rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ambar); }
+.cartao3d b { font-size: 1rem; font-weight: 700; white-space: nowrap; }
+.cartao3d:hover { background: #2C2F38; }
+.cartao3d--mob { left: -9%; top: 7%; transform: translateZ(130px) rotateY(10deg); --t: 6.5s; }
+.cartao3d--pet { right: 0; top: 43%; transform: translateZ(190px) rotateY(-6deg); --t: 7.5s; --d: -2s; }
+.cartao3d--mulher { left: 1%; bottom: 7%; transform: translateZ(80px) rotateY(12deg); --t: 8s; --d: -4s; }
+
+/* fichas redondas, no desenho dos selos dos ícones do app */
+.ficha { display: grid; place-items: center; width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--app-txt); background: var(--app-fundo); color: var(--ambar); box-shadow: 0 12px 30px rgba(0, 0, 0, .5), 0 0 22px rgba(233, 158, 9, .28); }
+.ficha .ic, .ficha svg { width: 30px; height: 30px; }
+.ficha--a { right: 9%; top: 5%; transform: translateZ(70px); --t: 5.5s; --d: -1s; }
+.ficha--b { left: 6%; top: 38%; transform: translateZ(-130px) scale(.9); opacity: .8; --t: 7s; --d: -3s; }
+.ficha--c { right: 12%; bottom: 10%; transform: translateZ(130px); --t: 6s; --d: -2.5s; }
+.ficha--d { left: 44%; top: -1%; transform: translateZ(-220px); opacity: .6; filter: blur(1.5px); --t: 9s; --d: -5s; }
+
+.pino { width: 40px; height: 40px; color: var(--ambar); filter: drop-shadow(0 8px 10px rgba(0, 0, 0, .5)) drop-shadow(0 0 12px rgba(233, 158, 9, .6)); }
+.pino svg { width: 100%; height: 100%; fill: currentColor; }
+.pino--a { left: 5%; top: 60%; transform: translateZ(-70px); --t: 5s; }
+.pino--b { right: 1%; top: 22%; transform: translateZ(-170px); --t: 6.2s; --d: -2s; }
+
+/* celular estreito: menos peças e cartões menores, para a tela continuar à vista */
+@media (max-width: 599px) {
+  .palco { height: 520px; }
+  .cartao3d { min-width: 0; padding-right: 12px; scale: .82; }
+  .cartao3d--mulher { left: 0; top: 0; bottom: auto; transform-origin: 0 0; }
+  .cartao3d--pet { right: 0; top: 27%; transform-origin: 100% 0; }
+  .cartao3d--mob, .ficha--b, .ficha--c, .pino--a { display: none; }
+  .ficha { width: 48px; height: 48px; }
+  .ficha .ic, .ficha svg { width: 24px; height: 24px; }
+}
+
+/* ---------- Vídeo de lançamento (saiu do hero) ---------- */
+.secao--filme { padding-block: 56px 72px; }
+.cabeca--centro { margin-inline: auto; text-align: center; }
+.secao--filme .filme { max-width: 980px; margin-inline: auto; }
+@media (min-width: 960px) { .secao--filme { padding-block: 72px 104px; } }
+
+/* ---------- Modalidades: o veículo do app flutua no cartão ---------- */
+/* Os veículos do Figma são feitos para fundo escuro (pasta "fundo-escuro"): o cartão usa as cores das linhas do app. */
+.modalidade { grid-template-columns: 104px 1fr; background: var(--app-fundo); border-color: var(--app-borda); color: var(--app-txt); transition: border-color .2s, box-shadow .25s; }
+.modalidade p { color: var(--app-txt2); }
+.modalidade.ativo { border-color: var(--ambar); box-shadow: 0 24px 50px rgba(26, 27, 33, .28); }
+.modalidade__v { grid-row: span 2; width: 104px; height: auto; }
+@media (min-width: 720px) {
+  .modalidade { padding-top: 12px; }
+  .modalidade__v { width: 168px; margin: 0 0 6px -14px; }
+}
+@media (hover: hover) { .modalidade:hover .modalidade__v { translate: 0 -6px; } }
+.modalidade__v { transition: translate .25s ease-out; }
+
+/* ---------- Categorias: cartão inclina e o veículo salta da foto ---------- */
+.categoria { overflow: visible; }
+.categoria__foto, .categoria__arco { border-radius: calc(var(--raio) - 1px) calc(var(--raio) - 1px) 0 0; }
+/* margem em % vale sobre a largura do cartão: 75% é a altura da foto 4:3 */
+.categoria__v { position: absolute; right: 12px; top: 0; margin-top: calc(75% - 108px); width: 136px; height: auto; pointer-events: none; padding: 2px 4px; border-radius: 14px; border: 1px solid var(--app-borda); background: var(--app-fundo); box-shadow: 0 12px 26px rgba(0, 0, 0, .5); }
+.categoria__v--selo { display: grid; place-items: center; width: 64px; height: 64px; padding: 0; margin-top: calc(75% - 76px); border-radius: 50%; border: 2px solid var(--app-txt); color: var(--ambar); }
+.categoria__v--selo .ic { width: 32px; height: 32px; }
+.categoria { transition: border-color .25s, box-shadow .25s; }
+.categoria.ativo { border-color: var(--ambar); box-shadow: 0 24px 60px rgba(0, 0, 0, .45), 0 0 36px rgba(233, 158, 9, .18); }
+
+/* ---------- Celulares de demonstração no visual novo do app (escuro, Montserrat) ---------- */
+.celular--novo .celular__tela { height: 600px; min-height: 0; background: var(--app-fundo); color: var(--app-txt); font-family: var(--mont); }
+.celular--novo .app__voltar, .celular--novo .app__sub { color: var(--app-txt2); }
+.celular--novo .app__titulo { font-weight: 700; }
+.celular--novo .app__lista li { border-bottom-color: var(--app-borda); }
+.celular--novo .app__botao { font-weight: 700; }
+.celular--novo .app__lugares li { border-bottom-color: var(--app-borda); }
+.celular--novo .app__lugares small, .celular--novo .app__lugares em small, .celular--novo .app__aovivo { color: var(--app-txt3); }
+.celular--novo .app__foto { background: var(--app-sel); color: var(--ambar); }
+.celular--novo .app__aovivo i { box-shadow: 0 0 0 3px rgba(233, 158, 9, .25); }
+.tema-claro .celular--novo { box-shadow: 0 30px 60px rgba(26, 27, 33, .3), 0 0 0 1px var(--app-borda); }
+
+/* chave de preferência: agora é um botão de verdade */
+button.chave { border: 0; padding: 0; cursor: pointer; background: var(--app-alca); transition: background-color .2s; }
+button.chave::before { content: ""; position: absolute; inset: -10px -6px; } /* área de toque de 44 px */
+button.chave::after { transition: left .2s; }
+button.chave[aria-checked="true"] { background: var(--ambar); }
+button.chave[aria-checked="true"]::after { left: 21px; }
+.preferencias li { transition: border-color .2s, box-shadow .2s, background-color .2s; }
+.preferencias li.ligada { border-color: var(--ambar); background: var(--ambar-suave); box-shadow: 0 0 0 1px var(--ambar); }
+
+/* ---------- Explorar: "Qual km você quer?" ---------- */
+.raio { margin-top: 14px; }
+.raio label { display: grid; gap: 2px; font-size: .8125rem; font-weight: 600; }
+.raio output { color: var(--ambar); font-weight: 700; }
+.raio input { width: 100%; height: 28px; margin: 4px 0 0; accent-color: var(--ambar); cursor: pointer; }
+.radar { position: relative; flex: none; height: 132px; margin-top: 8px; border-radius: 14px; overflow: hidden; background:
+  linear-gradient(90deg, rgba(240, 240, 240, .05) 1px, transparent 1px) 0 0 / 22px 22px,
+  linear-gradient(0deg, rgba(240, 240, 240, .05) 1px, transparent 1px) 0 0 / 22px 22px, #262830; }
+.radar__eu { position: absolute; left: 50%; top: 50%; width: 12px; height: 12px; margin: -6px; border-radius: 50%; background: var(--app-txt); box-shadow: 0 0 0 3px #1A1B21; }
+/* o círculo cresce com o raio escolhido (--r de 0 a 1) */
+.radar__circ { position: absolute; left: 50%; top: 50%; width: 250px; height: 250px; margin: -125px; border-radius: 50%; border: 1.5px dashed var(--ambar); background: rgba(233, 158, 9, .12); transform: scale(calc(.16 + .84 * var(--r, .3))); transition: transform .35s cubic-bezier(.2, .7, .2, 1); }
+.radar__pino { position: absolute; left: calc(50% + var(--x)); top: calc(50% + var(--y)); width: 18px; height: 18px; margin: -16px 0 0 -9px; color: var(--ambar); transform-origin: 50% 100%; transform: scale(0); transition: transform .3s cubic-bezier(.3, 1.4, .5, 1); }
+.radar__pino svg { width: 100%; height: 100%; fill: currentColor; }
+.radar__pino.dentro { transform: scale(1); }
+.celular--novo .app__lugares { flex: 1 1 0; min-height: 0; overflow: hidden auto; margin-top: 8px; scrollbar-width: none; }
+.celular--novo .app__lugares::-webkit-scrollbar { display: none; }
+.celular--novo .app__aovivo { margin-top: 0; padding-top: 12px; }
+
+/* ---------- Cartões das seções escuras: borda acende perto do ponteiro ---------- */
+@media (hover: hover) {
+  .passos li, .trilhas li, .recursos > li { transition: border-color .2s, translate .25s ease-out, box-shadow .25s; }
+  .passos li:hover, .trilhas li:hover { border-color: var(--ambar); translate: 0 -3px; box-shadow: 0 14px 30px rgba(0, 0, 0, .35), 0 0 24px rgba(233, 158, 9, .14); }
+  .recursos > li:hover { border-color: var(--ambar); translate: 0 -3px; box-shadow: 0 14px 30px rgba(26, 27, 33, .12); }
+}
+
+/* ---------- Rodapé: a pista fecha a página ---------- */
+.rodape { position: relative; overflow: hidden; }
+.rodape > .wrap { position: relative; z-index: 1; }
+.pista--rodape { height: 320px; opacity: .4; }
+
+/* modo revisão: o contorno não entra no 3D */
+.revisao [data-tilt] { transform: none; }
+
+/* ---------- Demonstrações: celular + dica de uso ---------- */
+.demo { justify-self: center; width: min(100%, 320px); display: grid; gap: 14px; justify-items: center; }
+.demo .celular { width: 100%; }
+.demo__dica { font-size: .875rem; font-weight: 600; color: var(--mudo); text-align: center; }
+
+/* tablet: o cartão do alto não sai pela borda */
+@media (max-width: 959px) { .cartao3d--mob { left: 0; } }

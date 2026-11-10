@@ -19,6 +19,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/fx.css">
+  <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
   <!-- Ícones (desenho próprio, traço 2 px). Usados com <svg><use href="#i-..."/></svg>. -->
@@ -57,10 +59,16 @@
       <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
       <symbol id="i-fechar" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
       <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-mulher" viewBox="0 0 24 24"><circle cx="12" cy="9" r="3"/><path d="M7.5 13V9a4.5 4.5 0 0 1 9 0v4"/><path d="M5.5 20.5a6.5 6.5 0 0 1 13 0"/></symbol>
+      <symbol id="i-cerebro" viewBox="0 0 24 24"><path d="M12 5.5A3 3 0 0 0 7 6.2a3 3 0 0 0-2.5 4 3.2 3.2 0 0 0 .2 5A3 3 0 0 0 8.5 19.4 2.8 2.8 0 0 0 12 19z"/><path d="M12 5.5A3 3 0 0 1 17 6.2a3 3 0 0 1 2.5 4 3.2 3.2 0 0 1-.2 5 3 3 0 0 1-3.8 4.2A2.8 2.8 0 0 1 12 19"/><path d="M7 6.2c.2 1.8 1.3 3 3 3.3M4.6 10.2c1.4.2 2.4 1 2.9 2.3M19.4 10.2c-1.6 0-2.8.8-3.4 2M15.5 19.4c-.4-1.5.1-2.8 1.4-3.6"/></symbol>
+      <symbol id="i-acesso" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="7.3" r="1.2"/><path d="M7.8 10 12 10.9l4.2-.9M12 10.9v3.3L9.8 18M12 14.2l2.2 3.8"/></symbol>
+      <symbol id="i-cafe" viewBox="0 0 24 24"><path d="M4.5 9.5h11V15a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"/><path d="M15.5 11H17a2.5 2.5 0 0 1 0 5h-1.5M8 4v2.5M12 4v2.5"/></symbol>
+      <symbol id="i-farmacia" viewBox="0 0 24 24"><path d="M13.95 4.95 4.95 13.95a3.6 3.6 0 0 0 5.1 5.1l9-9a3.6 3.6 0 0 0-5.1-5.1z"/><path d="m9.45 9.45 5.1 5.1"/></symbol>
     </defs>
   </svg>
 
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+  <div class="progresso" aria-hidden="true"><i></i></div>
 
   <header class="topo" id="topo">
     <div class="wrap topo__in">
@@ -87,8 +95,9 @@
 
   <main id="conteudo" tabindex="-1">
 
-    <!-- 1. HERO -->
-    <section class="hero tema-escuro" id="inicio" aria-labelledby="hero-titulo">
+    <!-- 1. HERO: palco 3D com a tela nova do app (Figma "Tela de escolha da categoria") -->
+    <section class="hero hero--3d tema-escuro" id="inicio" aria-labelledby="hero-titulo" data-luz>
+      <div class="pista" aria-hidden="true"><div class="pista__grade"></div></div>
       <div class="wrap hero__grid">
         <div class="hero__texto">
           <p class="sobre">Chegou a <span class="marca">DNAVe</span></p>
@@ -106,6 +115,127 @@
           </div>
         </div>
 
+        <!-- O palco gira com o ponteiro (fx.js). As peças ficam em profundidades diferentes (translateZ). -->
+        <div class="palco" data-palco>
+          <div class="palco__cena">
+            <div class="palco__brilho" aria-hidden="true"></div>
+            <svg class="palco__rota" viewBox="0 0 600 660" preserveAspectRatio="none" aria-hidden="true"><path d="M50 440C60 250 240 60 400 70S560 130 574 190" vector-effect="non-scaling-stroke"/></svg>
+            <span class="flut pino pino--a" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 22s-7.5-6.4-7.5-12.2a7.5 7.5 0 0 1 15 0C19.5 15.6 12 22 12 22z"/><circle cx="12" cy="9.8" r="2.8" fill="#1A1B21"/></svg></span>
+            <span class="flut pino pino--b" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 22s-7.5-6.4-7.5-12.2a7.5 7.5 0 0 1 15 0C19.5 15.6 12 22 12 22z"/><circle cx="12" cy="9.8" r="2.8" fill="#1A1B21"/></svg></span>
+            <span class="flut ficha ficha--d" aria-hidden="true"><svg class="ic"><use href="#i-pata"/></svg></span>
+            <span class="flut ficha ficha--b" aria-hidden="true"><svg class="ic"><use href="#i-acesso"/></svg></span>
+
+            <div class="fone">
+              <div class="fone__tela">
+                <div class="app" role="group" aria-label="Demonstração da tela Escolha uma viagem, do app DNAVe" data-validar="Tela do app: tempos de exemplo, sem valores">
+                  <div class="app-mapa" aria-hidden="true">
+                    <img src="assets/app/mapa.svg" alt="" width="390" height="390">
+                    <i class="app-nave"></i>
+                  </div>
+                  <span class="app-voltar" aria-hidden="true"><img src="assets/app/seta-voltar.svg" alt="" width="22" height="22"></span>
+                  <div class="app-painel">
+                    <i class="app-alca" aria-hidden="true"></i>
+                    <p class="app-titulo">Escolha uma viagem</p>
+                    <div class="app-lista">
+                      <p class="app-secao">Mais pedidas</p>
+                      <button class="linha" type="button" aria-pressed="true" data-cat="Econômico">
+                        <img class="linha__ic" src="assets/app/v-economico.png" alt="" width="84" height="58">
+                        <span class="linha__txt"><b>Econômico</b><span>3 min de distância</span><small>Viagens de baixo custo</small></span>
+                      </button>
+                      <button class="linha" type="button" aria-pressed="false" data-cat="Convencional">
+                        <img class="linha__ic" src="assets/app/v-convencional.png" alt="" width="84" height="58">
+                        <span class="linha__txt"><b>Convencional</b><span>4 min de distância</span><small>Custo e veículos padrão</small></span>
+                      </button>
+                      <button class="linha" type="button" aria-pressed="false" data-cat="Moto">
+                        <img class="linha__ic" src="assets/app/v-moto.png" alt="" width="84" height="58">
+                        <span class="linha__txt"><b>Moto</b><span>2 min de distância</span><small>Viagens de moto</small></span>
+                      </button>
+                      <button class="linha" type="button" aria-pressed="false" data-cat="Premium">
+                        <img class="linha__ic" src="assets/app/v-premium.png" alt="" width="84" height="58">
+                        <span class="linha__txt"><b>Premium</b><span>6 min de distância</span><small>Motoristas e veículos executivos</small></span>
+                      </button>
+                      <div class="app-mais" hidden>
+                        <p class="app-secao">Categorias especiais</p>
+                        <button class="linha" type="button" aria-pressed="false" data-cat="Mulher">
+                          <img class="linha__ic" src="assets/app/v-mulher.png" alt="" width="84" height="58">
+                          <span class="linha__txt"><b>Mulher</b><span>5 min de distância</span><small>Passageiras e motoristas mulheres</small></span>
+                        </button>
+                        <button class="linha" type="button" aria-pressed="false" data-cat="Rainbow">
+                          <img class="linha__ic" src="assets/app/v-rainbow.png" alt="" width="84" height="58">
+                          <span class="linha__txt"><b>Rainbow</b><span>5 min de distância</span><small>Para a comunidade LGBTQIA+</small></span>
+                        </button>
+                        <button class="linha" type="button" aria-pressed="false" data-cat="Neurodivergente">
+                          <span class="linha__ic linha__ic--selo"><i><svg class="ic" aria-hidden="true"><use href="#i-cerebro"/></svg></i></span>
+                          <span class="linha__txt"><b>Neurodivergente</b><span>7 min de distância</span><small>Motoristas preparados para passageiros neurodivergentes</small></span>
+                        </button>
+                        <button class="linha" type="button" aria-pressed="false" data-cat="Mobilidade reduzida">
+                          <img class="linha__ic" src="assets/app/v-mobilidade.png" alt="" width="84" height="58">
+                          <span class="linha__txt"><b>Mobilidade reduzida</b><span>8 min de distância</span><small>Veículos adaptados para mobilidade reduzida</small></span>
+                        </button>
+                        <button class="linha" type="button" aria-pressed="false" data-cat="Pet">
+                          <img class="linha__ic" src="assets/app/v-pet.png" alt="" width="84" height="58">
+                          <span class="linha__txt"><b>Pet</b><span>4 min de distância</span><small>Viaje com seu animal de estimação</small></span>
+                        </button>
+                        <p class="app-secao">Outras opções</p>
+                        <button class="linha" type="button" aria-pressed="false" data-cat="Só quero Elétrico">
+                          <img class="linha__ic" src="assets/app/v-eletrico.png" alt="" width="84" height="58">
+                          <span class="linha__txt"><b>Só quero Elétrico</b><span>6 min de distância</span><small>Veículos 100% elétricos</small></span>
+                        </button>
+                        <p class="app-secao">Entregas</p>
+                        <button class="linha" type="button" aria-pressed="false" data-cat="Moto Entrega">
+                          <img class="linha__ic" src="assets/app/v-entrega.png" alt="" width="84" height="58">
+                          <span class="linha__txt"><b>Moto Entrega</b><span>3 min de distância</span><small>Envie ou receba encomendas</small></span>
+                        </button>
+                        <p class="app-outras">Entre outras categorias.</p>
+                      </div>
+                      <div class="app-acao">
+                        <button class="app-vermais" type="button" aria-expanded="false">
+                          <span>Ver mais categorias (7)</span>
+                          <img src="assets/app/seta.svg" alt="" width="18" height="18">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="app-rodape">
+                      <button class="app-confirmar" type="button" aria-live="polite">Confirmar Econômico</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- cartões que flutuam à frente do celular: escolhem a categoria na tela -->
+            <button class="flut cartao3d cartao3d--mulher" type="button" data-escolhe="Mulher" aria-label="Escolher a categoria Mulher na tela do app">
+              <img src="assets/app/v-mulher.png" alt="" width="84" height="58">
+              <span><small>Categoria</small><b>Mulher</b></span>
+            </button>
+            <button class="flut cartao3d cartao3d--mob" type="button" data-escolhe="Mobilidade reduzida" aria-label="Escolher a categoria Mobilidade reduzida na tela do app">
+              <img src="assets/app/v-mobilidade.png" alt="" width="84" height="58">
+              <span><small>Categoria</small><b>Mobilidade reduzida</b></span>
+            </button>
+            <button class="flut cartao3d cartao3d--pet" type="button" data-escolhe="Pet" aria-label="Escolher a categoria Pet na tela do app">
+              <img src="assets/app/v-pet.png" alt="" width="84" height="58">
+              <span><small>Categoria</small><b>Pet</b></span>
+            </button>
+            <span class="flut ficha ficha--a" aria-hidden="true"><svg class="ic"><use href="#i-cerebro"/></svg></span>
+            <span class="flut ficha ficha--c" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round">
+                <path d="M3 17.5a9 9 0 0 1 18 0" stroke="#E40303"/><path d="M4.6 17.5a7.4 7.4 0 0 1 14.8 0" stroke="#FF8C00"/>
+                <path d="M6.2 17.5a5.8 5.8 0 0 1 11.6 0" stroke="#FFED00"/><path d="M7.8 17.5a4.2 4.2 0 0 1 8.4 0" stroke="#008026"/>
+                <path d="M9.4 17.5a2.6 2.6 0 0 1 5.2 0" stroke="#004CFF"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1b. VÍDEO DE LANÇAMENTO -->
+    <section class="secao secao--filme tema-escuro" id="video" aria-labelledby="video-titulo" data-luz>
+      <div class="wrap">
+        <div class="cabeca cabeca--centro">
+          <p class="sobre">Vídeo de lançamento</p>
+          <h2 id="video-titulo">Tem novidade chegando na cidade.</h2>
+        </div>
         <figure class="filme">
           <div class="filme__quadro">
             <video id="filme" class="filme__video" controls playsinline muted preload="metadata"
@@ -159,23 +289,23 @@
         </div>
 
         <ul class="modalidades" data-validar="Modalidades ativas em cada cidade de lançamento">
-          <li class="modalidade">
-            <span class="modalidade__ic"><svg class="ic" aria-hidden="true"><use href="#i-carteira"/></svg></span>
+          <li class="modalidade" data-tilt>
+            <img class="modalidade__v salta" src="assets/app/v-economico.png" alt="" width="168" height="116" loading="lazy">
             <h3>Econômico</h3>
             <p>Para o dia a dia, com foco em economia.</p>
           </li>
-          <li class="modalidade">
-            <span class="modalidade__ic"><svg class="ic" aria-hidden="true"><use href="#i-carro"/></svg></span>
+          <li class="modalidade" data-tilt>
+            <img class="modalidade__v salta" src="assets/app/v-convencional.png" alt="" width="168" height="116" loading="lazy">
             <h3>Convencional</h3>
             <p>Corridas regulares para ir e vir pela cidade.</p>
           </li>
-          <li class="modalidade">
-            <span class="modalidade__ic"><svg class="ic" aria-hidden="true"><use href="#i-estrela"/></svg></span>
+          <li class="modalidade" data-tilt>
+            <img class="modalidade__v salta" src="assets/app/v-premium.png" alt="" width="168" height="116" loading="lazy">
             <h3>Premium</h3>
             <p>Viagem com padrão diferenciado.</p>
           </li>
-          <li class="modalidade">
-            <span class="modalidade__ic"><svg class="ic" aria-hidden="true"><use href="#i-moto"/></svg></span>
+          <li class="modalidade" data-tilt>
+            <img class="modalidade__v salta" src="assets/app/v-moto.png" alt="" width="168" height="116" loading="lazy">
             <h3>Moto</h3>
             <p>Viagem individual de motocicleta.</p>
           </li>
@@ -185,7 +315,7 @@
     </section>
 
     <!-- 3. CATEGORIAS ESPECIAIS -->
-    <section class="secao tema-escuro" id="categorias" aria-labelledby="cat-titulo">
+    <section class="secao tema-escuro" id="categorias" aria-labelledby="cat-titulo" data-luz>
       <div class="wrap">
         <div class="cabeca">
           <p class="sobre">Categorias especiais</p>
@@ -194,9 +324,10 @@
         </div>
 
         <ul class="categorias">
-          <li class="categoria" data-validar="Categoria Mulher ativa no lançamento">
+          <li class="categoria" data-tilt data-validar="Categoria Mulher ativa no lançamento">
             <img class="categoria__foto" src="assets/img/mulher.jpg" width="800" height="1200" loading="lazy"
                  alt="Motorista mulher sorrindo ao volante do carro.">
+            <img class="categoria__v salta" src="assets/app/v-mulher.png" alt="" width="150" height="104" loading="lazy">
             <div class="categoria__corpo">
               <h3>Categoria Mulher</h3>
               <p class="categoria__slogan">Mais escolha para o seu caminho.</p>
@@ -209,9 +340,10 @@
             </div>
           </li>
 
-          <li class="categoria" data-validar="Categoria Pet ativa no lançamento">
+          <li class="categoria" data-tilt data-validar="Categoria Pet ativa no lançamento">
             <img class="categoria__foto" src="assets/img/pet.jpg" width="800" height="1200" loading="lazy"
                  alt="Mulher sorrindo no banco do carro, abraçada ao seu cachorro.">
+            <img class="categoria__v salta" src="assets/app/v-pet.png" alt="" width="150" height="104" loading="lazy">
             <div class="categoria__corpo">
               <h3>Categoria Pet</h3>
               <p class="categoria__slogan">Seu melhor amigo também vai.</p>
@@ -219,9 +351,10 @@
             </div>
           </li>
 
-          <li class="categoria" data-validar="Categoria Neurodivergente ativa no lançamento">
+          <li class="categoria" data-tilt data-validar="Categoria Neurodivergente ativa no lançamento">
             <img class="categoria__foto" src="assets/img/neurodivergente.jpg" width="1280" height="960" loading="lazy"
                  alt="Rapaz de fone de ouvido no banco de trás do carro, sorrindo e olhando pela janela.">
+            <span class="categoria__v categoria__v--selo salta" aria-hidden="true"><svg class="ic"><use href="#i-cerebro"/></svg></span>
             <div class="categoria__corpo">
               <h3>Categoria Neurodivergente</h3>
               <p>Para pessoas neurodivergentes, com uma viagem no seu ritmo: menos estímulos, comunicação objetiva e silêncio, se você preferir.</p>
@@ -229,9 +362,10 @@
             </div>
           </li>
 
-          <li class="categoria" data-validar="Categoria Mobilidade reduzida ativa no lançamento">
+          <li class="categoria" data-tilt data-validar="Categoria Mobilidade reduzida ativa no lançamento">
             <img class="categoria__foto" src="assets/img/inclusiva.jpg" width="1280" height="720" loading="lazy"
                  alt="Para-brisa de um carro com o símbolo internacional de acessibilidade.">
+            <img class="categoria__v salta" src="assets/app/v-mobilidade.png" alt="" width="150" height="104" loading="lazy">
             <div class="categoria__corpo">
               <h3>Categoria Mobilidade reduzida</h3>
               <p>Para pessoas com deficiência ou mobilidade reduzida e para quem precisa de um cuidado a mais.</p>
@@ -239,10 +373,11 @@
             </div>
           </li>
 
-          <li class="categoria categoria--rainbow" data-validar="Categoria Rainbow: detalhes da categoria e texto">
+          <li class="categoria categoria--rainbow" data-tilt data-validar="Categoria Rainbow: detalhes da categoria e texto">
             <div class="categoria__arco" aria-hidden="true">
               <img src="assets/logo/simbolo.svg" alt="" width="88" height="88">
             </div>
+            <img class="categoria__v salta" src="assets/app/v-rainbow.png" alt="" width="150" height="104" loading="lazy">
             <div class="categoria__corpo">
               <h3>Categoria Rainbow</h3>
               <p class="selo selo--novo">Nova categoria</p>
@@ -285,27 +420,30 @@
           </ul>
         </div>
 
-        <div class="celular" role="img" aria-label="Tela do app DNAVe: Acessibilidade e atendimento, com as opções viagem em silêncio e comunicação objetiva ligadas.">
-          <div class="celular__tela" aria-hidden="true">
-            <div class="app__barra"><span>9:41</span></div>
-            <p class="app__voltar">‹ Perfil</p>
+        <div class="demo">
+        <div class="celular celular--novo" data-tilt="suave" data-validar="Tela do app: exemplo das preferências">
+          <div class="celular__tela" role="group" aria-label="Demonstração: preferências de acessibilidade e atendimento no app DNAVe. Ligue e desligue as chaves.">
+            <div class="app__barra" aria-hidden="true"><span>9:41</span></div>
+            <p class="app__voltar" aria-hidden="true">‹ Perfil</p>
             <p class="app__titulo">Acessibilidade e atendimento</p>
             <p class="app__sub">Conte como você prefere viajar</p>
-            <ul class="app__lista">
-              <li><span>Viagem em silêncio</span><i class="chave chave--on"></i></li>
-              <li><span>Comunicação objetiva</span><i class="chave chave--on"></i></li>
-              <li><span>Menos estímulos</span><i class="chave"></i></li>
-              <li><span>Vou com acompanhante</span><i class="chave"></i></li>
-              <li><span>Vou com cão-guia</span><i class="chave"></i></li>
+            <ul class="app__lista" data-chaves>
+              <li><span id="pref-0">Viagem em silêncio</span><button class="chave" type="button" role="switch" aria-checked="true" aria-labelledby="pref-0"></button></li>
+              <li><span id="pref-1">Comunicação objetiva</span><button class="chave" type="button" role="switch" aria-checked="true" aria-labelledby="pref-1"></button></li>
+              <li><span id="pref-2">Menos estímulos</span><button class="chave" type="button" role="switch" aria-checked="false" aria-labelledby="pref-2"></button></li>
+              <li><span id="pref-3">Vou com acompanhante</span><button class="chave" type="button" role="switch" aria-checked="false" aria-labelledby="pref-3"></button></li>
+              <li><span id="pref-4">Vou com cão-guia</span><button class="chave" type="button" role="switch" aria-checked="false" aria-labelledby="pref-4"></button></li>
             </ul>
-            <p class="app__botao">Salvar preferências</p>
+            <p class="app__botao" aria-hidden="true">Salvar preferências</p>
           </div>
+        </div>
+        <p class="demo__dica">Toque nas chaves para testar.</p>
         </div>
       </div>
     </section>
 
     <!-- 5. ABA EXPLORAR -->
-    <section class="secao tema-escuro" id="explorar" aria-labelledby="exp-titulo">
+    <section class="secao tema-escuro" id="explorar" aria-labelledby="exp-titulo" data-luz>
       <div class="wrap duas-colunas">
         <div>
           <p class="sobre">Aba Explorar <span class="selo selo--novo">Novo</span></p>
@@ -332,28 +470,45 @@
           </ul>
         </div>
 
-        <div class="celular" role="img" data-validar="Faixas de distância e lugares da tela são exemplos"
-             aria-label="Tela do app DNAVe na aba Explorar: restaurantes num raio de 3 km, cada um com a sua nota no Google.">
-          <div class="celular__tela" aria-hidden="true">
-            <div class="app__barra"><span>9:41</span></div>
+        <div class="demo">
+        <div class="celular celular--novo" data-tilt="suave" data-validar="Distâncias, lugares e notas da tela são exemplos">
+          <div class="celular__tela" role="group" aria-label="Demonstração da aba Explorar do app DNAVe. Mova o controle para escolher a distância.">
+            <div class="app__barra" aria-hidden="true"><span>9:41</span></div>
             <p class="app__titulo">Explorar</p>
-            <p class="app__sub">Perto de você</p>
-            <p class="app__abas"><span class="ativo">Restaurantes</span><span>Pontos turísticos</span></p>
-            <p class="app__faixas"><span>1 km</span><span class="ativo">3 km</span><span>5 km</span><span>10 km</span></p>
-            <ul class="app__lugares">
-              <li><span class="app__foto app__foto--1"><svg class="ic"><use href="#i-talheres"/></svg></span><span><b>Cantina da Praça</b><small>Italiana · 1,2 km</small></span><em>★ 4,7<small>Google</small></em></li>
-              <li><span class="app__foto app__foto--2"><svg class="ic"><use href="#i-talheres"/></svg></span><span><b>Mercado Central</b><small>Regional · 2,1 km</small></span><em>★ 4,6<small>Google</small></em></li>
-              <li><span class="app__foto app__foto--3"><svg class="ic"><use href="#i-talheres"/></svg></span><span><b>Café do Mirante</b><small>Café · 2,8 km</small></span><em>★ 4,8<small>Google</small></em></li>
-              <li><span class="app__foto app__foto--1"><svg class="ic"><use href="#i-talheres"/></svg></span><span><b>Sabor da Serra</b><small>Mineira · 2,9 km</small></span><em>★ 4,5<small>Google</small></em></li>
+            <p class="app__sub">Lugares perto de você</p>
+            <div class="raio">
+              <label for="raio-km">Qual km você quer? <output id="raio-saida" for="raio-km">até 3 km</output></label>
+              <input id="raio-km" type="range" min="1" max="10" step="1" value="3">
+            </div>
+            <!-- pinos: --x e --y em px a partir do centro; a distância do centro acompanha o km do lugar -->
+            <div class="radar" aria-hidden="true">
+              <i class="radar__circ"></i>
+              <i class="radar__eu"></i>
+              <span class="radar__pino" data-km="0.8" style="--x: 8px; --y: -6px"><svg viewBox="0 0 24 24"><path d="M12 22s-7.5-6.4-7.5-12.2a7.5 7.5 0 0 1 15 0C19.5 15.6 12 22 12 22z"/></svg></span>
+              <span class="radar__pino" data-km="1.6" style="--x: -18px; --y: 10px"><svg viewBox="0 0 24 24"><path d="M12 22s-7.5-6.4-7.5-12.2a7.5 7.5 0 0 1 15 0C19.5 15.6 12 22 12 22z"/></svg></span>
+              <span class="radar__pino" data-km="2.4" style="--x: 26px; --y: 16px"><svg viewBox="0 0 24 24"><path d="M12 22s-7.5-6.4-7.5-12.2a7.5 7.5 0 0 1 15 0C19.5 15.6 12 22 12 22z"/></svg></span>
+              <span class="radar__pino" data-km="3.5" style="--x: -40px; --y: -22px"><svg viewBox="0 0 24 24"><path d="M12 22s-7.5-6.4-7.5-12.2a7.5 7.5 0 0 1 15 0C19.5 15.6 12 22 12 22z"/></svg></span>
+              <span class="radar__pino" data-km="5.2" style="--x: 62px; --y: -20px"><svg viewBox="0 0 24 24"><path d="M12 22s-7.5-6.4-7.5-12.2a7.5 7.5 0 0 1 15 0C19.5 15.6 12 22 12 22z"/></svg></span>
+              <span class="radar__pino" data-km="7.8" style="--x: -92px; --y: 30px"><svg viewBox="0 0 24 24"><path d="M12 22s-7.5-6.4-7.5-12.2a7.5 7.5 0 0 1 15 0C19.5 15.6 12 22 12 22z"/></svg></span>
+            </div>
+            <ul class="app__lugares" aria-live="polite">
+              <li data-km="0.8"><span class="app__foto"><svg class="ic" aria-hidden="true"><use href="#i-talheres"/></svg></span><span><b>Cantina da Praça</b><small>Restaurante · 0,8 km</small></span><em>★ 4,7<small>Google</small></em></li>
+              <li data-km="1.6"><span class="app__foto"><svg class="ic" aria-hidden="true"><use href="#i-cafe"/></svg></span><span><b>Café do Mirante</b><small>Café · 1,6 km</small></span><em>★ 4,8<small>Google</small></em></li>
+              <li data-km="2.4"><span class="app__foto"><svg class="ic" aria-hidden="true"><use href="#i-sacola"/></svg></span><span><b>Mercado Central</b><small>Mercado · 2,4 km</small></span><em>★ 4,6<small>Google</small></em></li>
+              <li data-km="3.5"><span class="app__foto"><svg class="ic" aria-hidden="true"><use href="#i-loja"/></svg></span><span><b>Padaria Pão Quente</b><small>Padaria · 3,5 km</small></span><em>★ 4,5<small>Google</small></em></li>
+              <li data-km="5.2"><span class="app__foto"><svg class="ic" aria-hidden="true"><use href="#i-camera"/></svg></span><span><b>Mirante da Cidade</b><small>Ponto turístico · 5,2 km</small></span><em>★ 4,9<small>Google</small></em></li>
+              <li data-km="7.8"><span class="app__foto"><svg class="ic" aria-hidden="true"><use href="#i-farmacia"/></svg></span><span><b>Farmácia Vida</b><small>Farmácia · 7,8 km</small></span><em>★ 4,4<small>Google</small></em></li>
             </ul>
             <p class="app__aovivo"><i></i>Notas do Google atualizadas agora</p>
           </div>
+        </div>
+        <p class="demo__dica">Arraste o controle para mudar a distância.</p>
         </div>
       </div>
     </section>
 
     <!-- 6. PASSAGEIRO E COMÉRCIO LOCAL -->
-    <section class="secao secao--emenda tema-escuro" id="passageiro" aria-labelledby="pas-titulo">
+    <section class="secao secao--emenda tema-escuro" id="passageiro" aria-labelledby="pas-titulo" data-luz>
       <div class="wrap duas-colunas duas-colunas--foto">
         <div>
           <p class="sobre">Para o passageiro</p>
@@ -399,8 +554,8 @@
     <!-- 7. MOTORISTA EMPREENDEDOR + DNAVE ACADEMY -->
     <section class="secao tema-claro" id="motorista" aria-labelledby="mot-titulo">
       <div class="wrap duas-colunas duas-colunas--foto duas-colunas--inverte">
-        <img class="foto-alta" src="assets/img/motorista.jpg" width="900" height="1350" loading="lazy"
-             alt="Motorista sorrindo no banco do carro e mostrando a tela do celular.">
+        <img class="foto-alta" src="assets/img/motorista.jpg" width="900" height="1200" loading="lazy"
+             alt="Motorista jovem sorrindo ao volante, visto pelo para-brisa do carro.">
         <div>
           <p class="sobre">Motorista empreendedor</p>
           <h2 id="mot-titulo">Mais oportunidades a cada corrida.</h2>
@@ -466,7 +621,8 @@
   </main>
 
   <!-- 8. RODAPÉ COM AS LOJAS -->
-  <footer class="rodape tema-escuro" id="baixe" aria-labelledby="baixe-titulo">
+  <footer class="rodape tema-escuro" id="baixe" aria-labelledby="baixe-titulo" data-luz>
+    <div class="pista pista--rodape" aria-hidden="true"><div class="pista__grade"></div></div>
     <div class="wrap rodape__cta">
       <div>
         <h2 id="baixe-titulo">Baixe a DNAVe e chame sua primeira corrida.</h2>
@@ -508,5 +664,6 @@
 
   <script src="assets/js/legenda.js" defer></script>
   <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/fx.js" defer></script>
 </body>
 </html>

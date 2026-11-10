@@ -372,3 +372,6 @@ h3 { font-size: 1.25rem; }
 }
 .revisao .categoria[data-validar]::before { top: 8px; }
 .revisao-faixa { position: fixed; z-index: 60; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); padding: 12px 16px; border-radius: 12px; background: var(--ambar); color: var(--grafite); font-size: .9375rem; box-shadow: 0 10px 30px rgba(0, 0, 0, .35); }
+
+/* A marca se escreve "DNAVe", inclusive dentro de rótulo em caixa alta. */
+.marca { text-transform: none; }
